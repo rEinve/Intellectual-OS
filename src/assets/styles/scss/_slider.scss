@@ -1,0 +1,109 @@
+@import "mixin";
+
+.carousel-section {
+    overflow: hidden;
+    position: relative;
+
+    .wrapper {
+        border-radius: 32px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .grid-col {
+        grid-column: 1/span 12;
+    }
+
+
+    .slides {
+        grid-gap: var(--space-m);
+        display: grid;
+        gap: var(--space-m);
+        grid-auto-columns: 100%;
+        grid-auto-flow: column;
+        justify-items: center;
+        list-style-type: none;
+        transition:
+            transform 0.5s ease-in-out,
+            height 0.5s ease-in-out;
+    }
+
+    .slide {
+        max-width: 100%;
+
+        .wrapper {
+            grid-gap: var(--space-xxl);
+            grid-template-columns: repeat(12, 1fr);
+            display: grid;
+            justify-items: center;
+            margin: 0 auto;
+        }
+    }
+
+    .main-asset {
+        grid-column: 1 / span 5;
+        max-width: none;
+
+        .media-container {
+            display: flex;
+            overflow: hidden;
+            align-items: center;
+            aspect-ratio: 1/1;
+            background-color: var(--surface-95);
+            border-radius: 14px;
+            display: flex;
+            justify-content: center;
+            @extend .border-rl; // 32px radius
+            padding: var(--space-xl);
+            width: 100%;
+
+            .image {
+                align-items: center;
+                aspect-ratio: 2/3;
+                display: flex;
+                justify-content: center;
+                width: 100%;
+            }
+        }
+    }
+
+    .main-article {
+        display: flex;
+        flex-direction: column;
+        max-width: 100%;
+        gap: var(--space-l);
+        grid-column: 7 / span 6;
+
+        p {
+            max-width: 58ch;
+        }
+    }
+}
+
+// Controls logic remains compatible with slider.js
+.slider-dots {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-xs);
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin-top: var(--space-xs);
+    position: relative;
+    z-index: 0;
+
+    .dot {
+        width: 0.625rem;
+        height: 0.556rem;
+        border-radius: var(--radius-pill);
+        background: var(--accent);
+        border: none;
+        cursor: pointer;
+        transition: width var(--motion-fast) var(--ease-standard);
+
+        &.is-active {
+            width: var(--space-xxl); // Active indicator expansion
+            background: var(--accent-80);
+        }
+    }
+}

@@ -1,0 +1,359 @@
+.post {
+  .post-header {
+    display: block;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 0 auto;
+  }
+
+  .pot-time {
+    @extend .label-l;
+    @extend .margin-tb-m
+  }
+
+  #post-entry,
+  .post-header,
+  .post-figure {
+    margin: 0 auto;
+  }
+
+  .post-header {
+    max-width: 68ch;
+
+  }
+
+
+  .post-figure {
+    max-width: 130ch;
+
+    img {
+      border-radius: var(--radius-xl);
+      aspect-ratio: 3 / 2;
+    }
+
+  }
+
+  .post-entry {
+    max-width: 68ch;
+
+    p {
+      max-width: 60ch;
+      margin-block-start: 0;
+      margin-block-end: var(--rhythm-base);
+    }
+
+    ul {
+      max-width: 50ch;
+      margin-left: 2rem;
+    }
+
+
+    p:first-of-type {
+      @extend .lead;
+      grid-column: 4 / span 5;
+      /* Spans 1 column wider than the body */
+      line-height: 1.6;
+      margin-bottom: var(--space-xl);
+    }
+
+  }
+
+
+  .article {
+    margin-inline: auto;
+    padding-inline: clamp(1rem, 4vw, 2.5rem);
+    background-color: var(--surface-99);
+
+    --rhythm-tight: 0.75em;
+    --rhythm-base: 1.25em;
+    --rhythm-loose: 2.25em;
+
+    font-variation-settings:
+      "wght" 420,
+      "opsz" 14;
+
+    line-height: 1.65;
+    color: var(--text-primary-40);
+  }
+
+  /* Feature articles */
+
+
+
+  /* -------------------------
+   Paragraphs
+-------------------------- */
+
+
+
+  /* Lede — automatic first paragraph */
+  >p:first-of-type {
+    font-variation-settings:
+      "wght" 460,
+      "opsz" 16;
+
+    line-height: 1.55;
+    letter-spacing: -0.005em;
+    margin-bottom: 1.75em;
+  }
+
+  /* Explicit lede (editor control) */
+  .lede {
+    font-variation-settings:
+      "wght" 470,
+      "opsz" 17;
+
+    line-height: 1.5;
+    letter-spacing: -0.01em;
+    margin-bottom: 2em;
+  }
+
+  /* Tone background lede */
+  .lede--tone {
+    background: color-mix(in oklch,
+        var(--color-text-primary) 12%,
+        transparent);
+
+    padding: 1.25rem 1.5rem;
+    border-radius: 0.75rem;
+  }
+
+  /* -------------------------
+   Headings
+-------------------------- */
+
+  h1 {
+    font-variation-settings: "wght" 560, "opsz" 36;
+    letter-spacing: -0.015em;
+    margin-bottom: var(--rhythm-base);
+  }
+
+  h2 {
+    font-variation-settings: "wght" 520, "opsz" 28;
+    letter-spacing: -0.01em;
+    margin-bottom: var(--rhythm-base);
+  }
+
+  .h3,
+  h3 {
+    font-variation-settings: "wght" 400, "opsz" 22;
+    letter-spacing: -0.01em;
+    margin-block-start: var(--rhythm-loose) !important;
+    margin-bottom: var(--rhythm-tight) !important;
+  }
+
+  /* Tighten paragraph after headings */
+  h1+p,
+  h2+p,
+  h3+p {
+    margin-top: var(--rhythm-tight);
+  }
+
+  /* -------------------------
+   Inline Emphasis
+-------------------------- */
+
+  strong {
+    font-variation-settings: "wght" 500, "opsz" 14;
+    color: var(--color-text-primary);
+  }
+
+  em {
+    font-style: normal;
+    font-variation-settings: "wght" 440, "opsz" 14;
+    color: var(--color-text-muted);
+  }
+
+  mark {
+    background: color-mix(in oklch,
+        var(--color-accent) 18%,
+        transparent);
+    padding: 0.1em 0.25em;
+    border-radius: 0.25em;
+  }
+
+  /* -------------------------
+   Links
+-------------------------- */
+
+  a {
+    font-variation-settings: "wght" 450, "opsz" 14;
+    color: currentColor;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.15em;
+  }
+
+  /* -------------------------
+   Small Text & Meta
+-------------------------- */
+
+  small,
+  .meta,
+  figcaption {
+    font-variation-settings: "wght" 430, "opsz" 11;
+    letter-spacing: 0.01em;
+    color: var(--text-primary-90);
+  }
+
+  /* -------------------------
+   Inline Code
+-------------------------- */
+
+  code {
+    font-variation-settings: "wght" 460, "opsz" 13;
+    letter-spacing: 0;
+  }
+
+  /* -------------------------
+   Blockquotes
+-------------------------- */
+
+  blockquote {
+    font-variation-settings: "wght" 460, "opsz" 16;
+    letter-spacing: -0.005em;
+    line-height: 1.55;
+    margin: var(--rhythm-loose) 0;
+  }
+
+  /* Pull Quote */
+  .pull-quote {
+    margin: var(--rhythm-loose) auto;
+    padding-left: 1.25rem;
+
+    border-left: 3px solid color-mix(in oklch,
+        var(--color-accent) 60%,
+        transparent);
+
+    font-variation-settings: "wght" 480, "opsz" 18;
+    line-height: 1.45;
+    letter-spacing: -0.01em;
+
+    max-width: 55ch;
+  }
+
+  .pull-quote cite {
+    display: block;
+    margin-top: 0.75em;
+
+    font-variation-settings: "wght" 420, "opsz" 13;
+    color: var(--text-primary-30);
+  }
+
+  /* -------------------------
+   Sections & Separators
+-------------------------- */
+
+  section,
+  hr {
+    margin-block: var(--rhythm-loose);
+  }
+
+}
+
+// Related post
+
+.related-posts {
+  @extend .padding-b-xxl;
+  max-width: max-content;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.2rem;
+
+  h4 {
+    @extend .small
+  }
+
+  li {
+    display: inline;
+    width: 20ch;
+
+    p {
+      display: none;
+    }
+
+    img {
+      @extend .border-rm;
+      max-width: 24rem;
+      aspect-ratio: 3/2;
+    }
+  }
+}
+
+.ShareWithFriend {
+  max-width: 30ch;
+  margin: 0 auto;
+}
+
+#post-navigation {
+  margin-block: var(--space-xxl);
+  padding-top: var(--space-lg);
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  border-top: 1px solid color-mix(in oklab,
+      currentColor 12%,
+      transparent);
+}
+
+.nav-prev {
+  text-align: left;
+  align-items: flex-start;
+}
+
+.nav-next {
+  text-align: right;
+  align-items: flex-end;
+}
+
+.post-page-nav {
+  grid-column: 1/ span 5;
+  max-width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-xl);
+  margin-top: var(--space-xxl);
+  padding-block: var(--space-xl);
+  list-style-type: none;
+
+
+
+  a:hover {
+    transform: translateY(-4px);
+  }
+
+}
+
+
+/* The Wrapper for the two sections */
+#related-posts>div {
+  /* Two equal cards */
+  gap: var(--space-l);
+}
+
+/* -------------------------
+   Responsive Optical Tuning
+-------------------------- */
+
+@media (min-width: 48rem) {
+  .article {
+    font-variation-settings: "wght" 420, "opsz" 15;
+  }
+
+  .article>p:first-of-type,
+  .article .lede {
+    font-variation-settings: "wght" 450, "opsz" 17;
+  }
+}
+
+@media (min-width: 64rem) {
+  .article {
+    font-variation-settings: "wght" 400, "opsz" 16;
+  }
+
+  .article>p:first-of-type,
+  .article .lede {
+    font-variation-settings: "wght" 440, "opsz" 18;
+  }
+}

@@ -1,0 +1,58 @@
+---
+import type { DistillBundle } from "@lib/distillBundle";
+
+type Props = {
+  folderSlug: string;
+  bundle: DistillBundle;
+  recursive?: boolean;
+};
+
+const { folderSlug, bundle, recursive = true } = Astro.props;
+
+const sections = Array.isArray(bundle?.sections) ? bundle.sections : [];
+---
+
+
+<section class="distill">
+  <header class="distill__header">
+    <h1>Distill: {folderSlug}</h1>
+    <p class="meta">
+      {recursive ? "Including subfolders" : "Direct notes only"} ·
+      {bundle.totalNotes} notes · {bundle.totalClips} clips
+    </p>
+  </header>
+
+  {bundle.totalClips === 0 ? (
+    <p class="empty">No clips found. Use blockquotes (&gt;) in notes.</p>
+  ) : (
+    <div class="distill__stream">
+      {sections.map((s) =>
+        s.clips.length ? (
+          <section class="streamNote">
+            <header class="streamNote__head">
+              <a class="streamNote__link" href={`/notes/${s.sourceSlug}/`}>
+                {s.sourceTitle}
+              </a>
+              <span class="streamNote__slug">{s.sourceSlug}</span>
+            </header>
+
+            <div class="streamNote__clips">
+              {s.clips.map((clip) => (
+                <div class="clip" id={clip.id}>
+                  {clip.section ? (
+                    <a class="clip__meta" href={`/notes/${clip.sourceSlug}/#${clip.section.slug}`}>
+                      <span class="clip__sec">{clip.section.text}</span>
+                    </a>
+                  ) : null}
+
+                  <div class="clip__text">{clip.text}</div>
+                </div>
+              ))}
+            </div>
+          </section>
+        ) : null
+      )}
+    </div>
+  )}
+</section>
+

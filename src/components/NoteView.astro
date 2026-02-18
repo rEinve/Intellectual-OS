@@ -1,0 +1,63 @@
+---
+import Breadcrumbs from "@components/Breadcrumbs.astro";
+import OnThisPage from "@components/OnThisPage.astro";
+import ClipsPanel from "@components/ClipsPanel.astro";
+
+import { extractClipsFromMarkdown } from "@lib/clips";
+import { extractClipsFromMarkdown } from "@lib/clips";
+import { getDisplayTitle } from "@lib/notesTree"; // if you already have it
+type Props = {
+  entry: any;
+  notes: any[];
+  components?: Record<string, any>;
+};
+
+const { entry, } = Astro.props;
+
+const { Content, headings } = await entry.render();
+
+const title =
+  entry.data?.title ??
+  (entry.slug?.split("/").slice(-1)[0] ?? "Untitled").replace(/-/g, " ");
+
+const updated =
+  entry.data?.updated ??
+  entry.data?.date ??
+  null;
+
+const folder = entry.slug?.split("/")[0] ?? "";
+
+const noteTitle = entry.data?.title?.trim() || getDisplayTitle(entry);
+const clips = extractClipsFromMarkdown({
+  body: entry.body,
+  sourceSlug: entry.slug,
+  sourceTitle: noteTitle,
+});
+
+---
+<div class="noteShell">
+<article class="noteView">
+  <header class="noteView__head">
+
+    <div class="noteView__kicker">
+      {folder ? <span class="noteView__folder">{folder}</span> : null}
+      {updated ? <time datetime={String(updated)} class="noteView__date">{String(updated)}</time> : null}
+    </div>
+
+    <h1 class="noteView__title">{title}</h1>
+
+    {entry.data?.description ? (
+      <p class="noteView__desc">{entry.data.description}</p>
+    ) : null}
+  </header>
+
+  <div class="noteView__body prose">
+     <Content/>
+  </div>
+</article>
+ <aside class="noteRail" aria-label="Context rail">
+    <OnThisPage headings={headings} minDepth={2} maxDepth={3} />
+    <ClipsPanel clips={clips} />
+  </aside>
+
+</div>

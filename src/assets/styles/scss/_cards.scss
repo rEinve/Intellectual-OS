@@ -1,0 +1,104 @@
+/* src/scss/_cards.scss - M3 Alignment */
+
+.card-grid {
+    @include grid-container(12); // Use your existing M3 grid mixin
+    gap: var(--space-xxl);
+}
+
+.card {
+    /* 1. Logic & Structure */
+    @include col-span(12);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+
+    /* 2. M3 Surface & Shape */
+    background-color: oklch(from var(--surface-99) l c h / 0.3);
+    border-radius: var(--radius-container-lg);
+    border: 0.16rem solid var(--surface-99);
+    //box-shadow: var(--elevation-3);
+
+    /* 3. Adaptive Layout */
+    @include breakpoint(medium) {
+        @include col-span(6);
+    }
+    @include breakpoint(large) {
+        @include col-span(4);
+    }
+
+    /* 4. Motion: M3 State Layer */
+    transition:
+        transform var(--motion-standard) var(--ease-standard),
+        ///box-shadow var(--motion-standard) var(--ease-standard),
+        background-color var(--motion-standard) var(--ease-standard);
+
+    &:hover {
+        transform: translateY(-8px);
+        //box-shadow: var(--elevation-3);
+        background-color: oklch(from var(--surface-100) l c h / 0.98);
+    }
+
+    &__image {
+        order: -1;
+        overflow: hidden;
+        border-radius: var(--radius-media-s) 0 0 !important;
+
+        img {
+            @extend .motion-linger;
+            aspect-ratio: 16/9;
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+    }
+
+    &__content {
+        padding: var(--space-l) var(--space-xl);
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        gap: var(--space-s);
+
+        &__category {
+            @extend .eyebrow;
+            color: var(--accent-40);
+        }
+        .headline-s {
+            @extend .label-l;
+            color: var(--text-primary-40);
+            margin: 0;
+        }
+
+        p {
+            @extend .body-m;
+            color: var(--text-primary-40);
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+    }
+
+    &_button {
+        @extend .btn;
+        @extend .motion-fast;
+        margin-top: auto;
+        align-self: flex-start;
+        color: var(--accent-60);
+        padding: 0;
+
+        // Stretch click area to whole card per M3 design
+        &::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+        }
+
+        &:hover {
+            text-decoration: underline;
+            color: var(--accent-40);
+        }
+    }
+}

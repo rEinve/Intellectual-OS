@@ -1,0 +1,386 @@
+@use "./mixin" as mx;
+
+:root {
+    /* Surface (light background base #F7F8F8 → oklch(98% 0.01 250)) */
+    --surface-0: oklch(0% 0 80);
+    --surface-10: oklch(10% 0.01 80);
+    --surface-20: oklch(20% 0.01 80);
+    --surface-30: oklch(30% 0.01 80);
+    --surface-40: oklch(40% 0.01 80);
+    --surface-50: oklch(50% 0.01 80);
+    --surface-60: oklch(60% 0.01 80);
+    --surface-70: oklch(70% 0.01 80);
+    --surface-80: oklch(80% 0.01 80);
+    --surface-90: oklch(90% 0.01 80);
+    --surface-95: oklch(95% 0.01 80);
+    --surface-99: oklch(98% 0.01 80);
+
+    /* Elevation levels */
+    /* --- The Vanilla Surface DNA --- */
+    --surface: oklch(98% 0.01 80);
+    --shadow-dna: 12% 0.02 80;
+    --elevation-0: none;
+    --elevation-1: 0 1px 2px oklch(var(--shadow-dna) / 0.08);
+    --elevation-2: 0 2px 6px oklch(var(--shadow-dna) / 0.1);
+    --elevation-3: 0 6px 16px oklch(var(--shadow-dna) / 0.12);
+    --elevation-4: 0 12px 28px oklch(var(--shadow-dna) / 0.14);
+    /* Static surfaces */
+    --surface-flat: var(--elevation-0);
+    --surface-raised: var(--elevation-1);
+    --surface-floating: var(--elevation-2);
+
+    /* Interactive */
+    --surface-hover: var(--elevation-2);
+    --surface-active: var(--elevation-1);
+    --surface-focus: var(--elevation-3);
+
+    /* Border Radii */
+    --radius-s: 0.5rem;
+    /* 8px */
+    --radius-m: 1rem;
+    /* 16px */
+    --radius-l: 2rem;
+    /* 32px - The Feature Punch */
+    --radius-xl: 3rem;
+    /* 48px - Extra "Mel Robbins" Softness */
+
+    /* For Buttons and Floating Action Buttons */
+    --radius-full: 9999px;
+
+    /* Shape scale (optical, not rigid) */
+    --shape-0: 0;
+    --shape-1: 0.25rem;
+    /* 4px */
+    --shape-2: 0.5rem;
+    /* 8px */
+    --shape-3: 0.75rem;
+    /* 12px */
+    --shape-4: 1rem;
+    /* 16px */
+    --shape-5: 1.5rem;
+    /* 24px */
+    --shape-6: 2rem;
+    /* 32px */
+
+    /* Containers */
+    --radius-container-sm: var(--shape-4);
+    --radius-container-md: var(--shape-5);
+    --radius-container-lg: var(--shape-6);
+
+    /* Media */
+    --radius-media-sm: calc(var(--radius-container-sm) * 0.72);
+    --radius-media-md: calc(var(--radius-container-md) * 0.72);
+    --radius-media-lg: calc(var(--radius-container-lg) * 0.72);
+
+    /* Controls */
+    --radius-control-sm: var(--shape-2);
+    --radius-control-md: var(--shape-3);
+    --radius-control-lg: var(--shape-4);
+
+    /* Pills / chips */
+    --radius-pill: 999px;
+    --space-xxs: 0.25rem; // micro pause
+    --space-xs: 0.625rem;
+    --space-s: 0.75rem;
+    --space-m: 1.25rem;
+    --space-l: 2rem; // section breath
+    --space-xl: 3rem;
+    --space-xxl: 4rem;
+    /* 32px */
+    --king-space: 6.25rem;
+    /* 100px - The King Space */
+
+    --frame-max: 1440px;
+    --frame-gutter: var(--space-l); // Using your "Rich Air" for side margins
+}
+
+
+.grid-12 {
+    @include mx.grid-container(12);
+    width: 100%;
+    max-width: var(--frame-max);
+    margin-inline: auto;
+}
+
+/* Responsive Span Utilities */
+.col-full {
+    grid-column: 1 / -1;
+}
+
+ @include mx.breakpoint(medium) {
+    .md-col-6 {
+        @include mx.col-span(6);
+    }
+    .md-col-12 {
+         @include mx.col-span(12);
+    }
+}
+
+ @include mx.breakpoint(expanded) {
+    .lg-col-4 {
+        @include mx.col-span(4);
+    }
+    .lg-col-8 {
+         @include mx.col-span(8);
+    }
+}
+
+// Hero Section
+body {
+    background-color: oklch(from var(--surface-99) l c h / 0.2);
+}
+
+article{
+    display:block; 
+}
+
+.frame {
+    width: 100%;
+    max-width: var(--frame-max);
+    margin-inline: auto;
+    /* The magic centering glue */
+    padding-inline: var(--frame-gutter);
+    position: relative;
+    /* For any absolute-positioned glass elements */
+
+    /* Prevent content from touching the edges on smaller screens */
+    box-sizing: border-box;
+}
+
+.border-rs {
+    border-radius: var(--radius-s);
+}
+
+.border-rm {
+    border-radius: var(--radius-m);
+}
+
+.border-rl {
+    border-radius: var(--radius-l);
+}
+
+.border-rxl {
+    border-radius: var(--radius-xl);
+}
+
+.aspect-standard {
+    aspect-ratio: 3 / 2;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    /* Essential to prevent squishing */
+}
+
+/* Utility Classes for Margin and Padding */
+.margin-xxl {
+    margin: var(--space-xxl);
+}
+
+.margin-xl {
+    margin: var(--space-xxl);
+}
+
+.margin-tb-m {
+    margin: var(--space-m) 0;
+}
+
+.margin-b-m {
+    margin-bottom: var(--space-m);
+}
+
+.margin-t-m {
+    margin-top: var(--space-m);
+}
+
+.margin-b-m {
+    margin-bottom: var(--space-m);
+}
+
+.padding-xxl {
+    padding: var(--space-xxl) 0;
+}
+
+.padding-t-xxl {
+    padding-top: var(--space-xxl);
+}
+
+.padding-b-xxl {
+    padding-bottom: var(--space-xxl);
+}
+
+.padding-b-m {
+    padding-bottom: var(--space-m);
+}
+
+.padding-l {
+    padding: var(--space-l) 0;
+}
+
+.padding-b-m {
+    padding-bottom: var(--space-m);
+}
+
+.padding-b-l {
+    padding-bottom: var(--space-l);
+}
+
+.padding-xl {
+    padding: var(--space-xl) 0;
+}
+
+.border-t{ border-top: 1px solid var(--text-color-70);}
+.border-b{ border-bottom: 1px solid var(--text-color-70);}
+
+.page-grid {
+    display: grid;
+    max-width: 112rem;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: clamp(1rem, 0.89rem + 0.54vw, 1.5rem);
+    margin: 0 auto;
+}
+
+.col-start-2 {
+    grid-column-start: 2;
+}
+
+.xlcol-span-6 {
+    grid-column: span 6 / span 6;
+}
+
+.xlcol-span-8 {
+    grid-column: span 8 / span 8;
+}
+
+.surface {
+    background: var(--surface);
+    border-radius: var(--radius-media-md);
+}
+
+//Fast motion (icons, dots, arrows)
+.stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-l);
+}
+
+.grid {
+    grid-gap: var(--space-xxl);
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    margin: 0 auto;
+    max-width: 1440px;
+    padding: 0 10px;
+}
+
+// Basic reset for padding and marginvsds
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ul,
+ol {
+    li {
+        margin: 0 !important;
+    }
+}
+
+@media (min-width: 1280px) {
+    .container-xxl,
+    .container-xl,
+    .container-lg,
+    .container-md,
+    .container-sm,
+    .container {
+        max-width: 100%;
+    }
+}
+
+.container {
+    margin: 0 auto;
+    padding: 0 calc(var(--space-l) * 1.5);
+}
+
+// NEW: Style the main element as a grid container
+main {
+    display: block;
+}
+
+// UPDATED: Default styling for all sections
+section,
+footer {
+    display: block;
+
+    padding-top: 32px;
+    padding-bottom: 32px;
+}
+
+
+
+.shelf__header {
+  margin: 0 0 16px;
+}
+.shelf__title { margin: 0; }
+.shelf__sub { margin: 6px 0 0; opacity: 0.8; }
+
+.shelf {
+  display: grid;
+  gap: 28px;
+}
+
+.shelf__groupHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 0 10px;
+}
+.shelf__groupTitle { margin: 0; }
+.shelf__groupMeta { margin: 0; opacity: 0.7; }
+
+.cards {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr;
+
+  @media (min-width: 600px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  @media (min-width: 840px) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.card {
+  display: grid;
+  gap: 6px;
+  padding: 8px 8px;
+  border-radius: 16px;
+  text-decoration: none;
+  min-height: 32px;
+
+  /* subtle “reader UI” without marketing shine */
+  outline: none;
+}
+.card:focus-visible {
+  box-shadow: 0 0 0 2px currentColor;
+}
+
+.card__title {
+  font-weight: 600;
+  line-height: 1.2;
+}
+.card__meta {
+  opacity: 0.7;
+  font-size: 0.95em;
+}
+
+.shelf__more {
+  margin-top: 10px;
+}
+.shelf__moreLink {
+  text-decoration: none;
+  opacity: 0.9;
+}
+

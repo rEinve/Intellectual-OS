@@ -1,0 +1,90 @@
+.vlog-post {
+
+    .article-hero {
+        background-color: var(--surface-99);
+    }
+
+    .hero-section {
+        margin-bottom: var(--padding-xxl);
+        position: relative;
+        min-height: 754px;
+    }
+
+    .assets-col {
+        align-items: center;
+        display: inline-grid;
+        justify-content: end;
+
+        .asset-wrapper {
+            display: flex;
+            align-items: center;
+            aspect-ratio: 1/1;
+            background-color: var(--surface-90);
+            height: max(340px, min(46vw, 674px));
+            justify-content: center;
+            margin: 0 auto;
+            padding: var(--space-xxl) var(--space-xl);
+            width: max(340px, min(46vw, 674px));
+            border-radius: var(--radius-container-lg);
+
+        }
+
+        .content-image {
+            border-radius: var(--radius-media-lg);
+            align-items: center;
+            aspect-ratio: var(--aspect-ratio, auto);
+            display: flex;
+            height: 100%;
+            justify-content: center;
+            width: 100%;
+
+        }
+
+    }
+
+    .content-header {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        gap: var(--space-m);
+    }
+
+    .post-meta-date {
+        display: flex;
+        padding: var(--space-l) var(--space-m);
+        justify-content: space-between;
+        width: 100%;
+    }
+
+
+    .content-col {
+        padding-top: var(--space-xxl);
+
+        .hero-content {
+            align-self: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+            gap: calc(var(--space-xxl)*4);
+            z-index: 1;
+        }
+    }
+
+    .article-media {
+        .share-conteinter {}
+
+        .media-inner-container {
+            width: 100%;
+        }
+
+        .media-container {
+            position: relative;
+            top: 0;
+        }
+    }
+.paragraph-container{
+    ul{ margin-left: var(--space-l);}
+
+    }
+}

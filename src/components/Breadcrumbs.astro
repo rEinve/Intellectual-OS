@@ -1,0 +1,96 @@
+---
+import Breadcrumbs from "@/components/Breadcrumbs.astro";
+
+type Props = {
+  entry: any;    // current note
+  notes: any[];  // full collection list
+};
+
+const { entry, notes } = Astro.props;
+const { Content } = await entry.render();
+
+function humanize(s: string) {
+  return (s ?? "").replace(/-/g, " ").replace(/\b\w/g, (m) => m.toUpperCase());
+}
+
+const parts = entry.slug.split("/");
+const folder = parts[0] ?? "";
+const title = entry.data?.title ?? humanize(parts.at(-1) ?? "Untitled");
+
+// siblings in same top folder (daily/projects/today)
+const siblings = notes
+  .filter((n) => (n.slug?.split("/")?.[0] ?? "") === folder)
+  .sort((a, b) => {
+    const da = new Date(a.data?.updated ?? a.data?.date ?? 0).valueOf();
+    const db = new Date(b.data?.updated ?? b.data?.date ?? 0).valueOf();
+    return db - da;
+  });
+
+const idx = siblings.findIndex((n) => n.slug === entry.slug);
+const prev = idx > 0 ? siblings[idx - 1] : null;
+const next = idx >= 0 && idx < siblings.length - 1 ? siblings[idx + 1] : null;
+---
+
+<section class="noteView">
+  <Breadcrumbs slug={entry.slug} title={title} />
+
+  <article class="prose">
+    <header class="noteView__head">
+      <h1 class="noteView__title">{title}</h1>
+      {entry.data?.description ? <p class="noteView__desc">{entry.data.description}</p> : null}
+    </header>
+
+    <Content />
+
+    <footer class="noteView__pager" aria-label="In-folder navigation">
+      {prev ? (
+        <a class="pager pager--prev" href={`/notes/${prev.slug}/`}>
+          <span class="pager__k">Previous</span>
+          <span class="pager__t">{prev.data?.title ?? humanize(prev.slug.split("/").at(-1) ?? "")}</span>
+        </a>
+      ) : <span />}
+
+      {next ? (
+        <a class="pager pager--next" href={`/notes/${next.slug}/`}>
+          <span class="pager__k">Next</span>
+          <span class="pager__t">{next.data?.title ?? humanize(next.slug.split("/").at(-1) ?? "")}</span>
+        </a>
+      ) : <span />}
+    </footer>
+  </article>
+</section>
+
+<style lang="scss">
+.noteView { display: grid; gap: 0.75rem; }
+
+.noteView__head { margin-bottom: 1rem; }
+.noteView__title {
+  margin: 0.25rem 0 0.35rem;
+  color: var(--text-primary-70);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  font-size: clamp(1.75rem, 2.2vw, 2.4rem);
+}
+.noteView__desc { margin: 0; color: var(--text-primary-50); max-width: 70ch; }
+
+.noteView__pager {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+.pager {
+  text-decoration: none;
+  border-radius: 16px;
+  border: 1px solid oklch(var(--shadow-dna) / 0.10);
+  background: var(--surface);
+  box-shadow: var(--elevation-0);
+  padding: 0.85rem 0.9rem;
+  min-height: 48px;
+  display: grid;
+  gap: 0.25rem;
+}
+.pager:hover { box-shadow: var(--elevation-1); }
+.pager__k { color: var(--text-primary-50); font-size: 0.9rem; }
+.pager__t { color: var(--text-primary-70); font-weight: 650; }
+</style>

@@ -1,0 +1,161 @@
+/* 1. THE HUB HEADER: Massive 2026 Typography */
+.hub-header {
+    background-color: var(--surface-99);
+    /* 100px Top & Bottom */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+
+    .centered-content {
+        text-align: center;
+
+        .hub-pitch {
+            p {
+                margin: 0 auto;
+            }
+        }
+    }
+}
+
+.feature-article {
+    /* Let the image do the talking */
+    max-width: 65%;
+    margin-inline: auto;
+    /* Centers the pillar */
+    padding-block: var(--space-xxl);
+    /* 100px Top/Bottom */
+
+    img {
+        object-fit: cover;
+        /* Apply the new system class */
+    }
+}
+
+/* 2. THE SPOTLIGHT: Automated Hero */
+/* The Container */
+
+.spotlight {
+    article {
+        display: grid;
+        grid-template-columns: 8rem 1fr 20rem;
+        align-items: start;
+        gap: var(--space-xl);
+        padding-bottom: var(--space-xl);
+        border-bottom: 1px solid var(--surface-80);
+
+        /* Material 3 Motion */
+        transition: transform var(--duration-medium) var(--ease-emphasized);
+
+        &:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+            /* Optional: tightens up the bottom of the section */
+        }
+    }
+
+    time {
+        font-family: var(--font-label);
+        /* Your sorted typography */
+        text-transform: uppercase;
+        color: var(--text-muted);
+        padding-top: 0.5rem;
+    }
+
+    h3 {
+        margin: 0 0 var(--space-s) 0;
+        max-width: 50ch;
+        /* Prevents titles from getting too long/loud */
+    }
+
+    p {
+        overflow: hidden;
+    }
+
+    img {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        /* Matches the Mel Robbins video thumbnail look */
+        object-fit: cover;
+        border-radius: 1rem;
+        /* Your rd-m */
+        transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+}
+
+.category-anchor {
+    /* Span the full 1920px width of the .frame grid */
+    grid-column: 1 / -1;
+
+    display: grid;
+    /* Maintain your 2:3 ratio internally so text stays aligned with the list */
+    grid-template-columns: 2fr 3fr;
+    /* 2rem breathing room */
+    border-bottom: 1px solid var(--surface-80);
+    /* The full-width divider */
+    margin-bottom: var(--space-xl);
+
+    h2 {
+        /* Subtle but clear */
+        letter-spacing: 0.15em;
+        color: var(--text-muted);
+        margin: 0;
+
+        .label-l {
+            display: inline;
+        }
+    }
+
+    .focus-word {
+        display: block;
+        font-size: var(--step-5);
+        /* Large and bold like your 'Growth' title */
+        color: var(--text-main);
+        margin-top: 0.5rem;
+        font-weight: 800;
+    }
+}
+
+.spotlight {
+    display: grid;
+    grid-template-columns: minmax(1rem, 1fr) minmax(0, 72rem) minmax(1rem, 1fr);
+}
+
+.spotlight-content {
+    grid-column: 2;
+}
+
+.post-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    .post-content {
+        max-width: 48ch;
+        /* not 62ch */
+    }
+
+    .post-date {
+        font-size: 0.85rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        opacity: 0.6;
+    }
+
+    .post-title {
+        font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+        line-height: 1.15;
+        margin-block: 0.5rem 0.75rem;
+    }
+
+    .post-excerpt {
+        font-size: 1.05rem;
+        line-height: 1.6;
+        opacity: 0.8;
+    }
+
+    .post-media img {
+        aspect-ratio: 16 / 10;
+        object-fit: cover;
+    }
+}

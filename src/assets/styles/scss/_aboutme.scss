@@ -1,0 +1,66 @@
+.page-about {
+    .about-page-header {
+        display: block;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin: 0 auto;
+    }
+
+    .label-l {
+        text-transform: lowercase;
+    }
+
+    .manifesto-block {
+        grid-column: 1 / span 1;
+        margin-block: var(--space-xl);
+    }
+
+    .about-page-entry,
+    .about-page-header,
+    .about-page-figure {
+        margin: 0 auto;
+    }
+
+    .about-page-header {
+        max-width: 68ch;
+    }
+
+    .about-page-figure {
+        max-width: 130ch;
+
+        img {
+            border-radius: 0;
+            aspect-ratio: 3 / 2;
+        }
+    }
+
+    .about-page-entry {
+        max-width: 68ch;
+        display: flex;
+        grid-template-columns: 1fr;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 1.2rem;
+
+        p {
+            max-width: 60ch;
+            margin-block-start: 0;
+            margin-block-end: var(--rhythm-base-);
+        }
+
+        ul {
+            max-width: 50ch;
+            margin-left: 2rem;
+        }
+        figure {
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        img {
+            max-width: 4rem;
+            height: auto;
+        }
+    }
+}

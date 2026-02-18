@@ -1,0 +1,41 @@
+---
+import NotesLayout from "@layouts/NotesLayout.astro";
+import DistillView from "@components/DistillView.astro";
+import { getCollection, getEntry } from "astro:content";
+import { entriesUnderFolder, allFolderSlugs } from "@lib/folders";
+import { buildDistillBundle } from "@lib/distillBundle";
+import { getMtimeMsForSlug } from "@lib/notesIndex";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("notes");
+  const folders = allFolderSlugs(entries);
+  return folders.map((slug) => ({ params: { slug } }));
+}
+
+const folderSlug = Astro.params.slug ?? "";
+const scope = Astro.url.searchParams.get("scope");
+const recursive = scope !== "direct";
+
+const allEntries = await getCollection("notes");
+
+// ✅ single declaration (aggregate + sort by mtime desc, fallback slug)
+const folderEntries = entriesUnderFolder(allEntries, folderSlug, { recursive }).sort((a, b) => {
+  const da = getMtimeMsForSlug(a.slug);
+  const db = getMtimeMsForSlug(b.slug);
+  if (db !== da) return db - da;
+  return a.slug.localeCompare(b.slug);
+});
+
+const bundle = await buildDistillBundle({
+  entries: folderEntries,
+  getBody: async (e) => {
+    const full = await getEntry("notes", e.slug);
+    return full?.body ?? "";
+  },
+  titleOf: (e) => e.data?.title ?? e.slug.split("/").slice(-1)[0].replace(/-/g, " "),
+});
+---
+
+<NotesLayout>
+  <DistillView folderSlug={folderSlug} recursive={recursive} bundle={bundle} />
+</NotesLayout>

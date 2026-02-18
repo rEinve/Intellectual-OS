@@ -1,0 +1,20 @@
+// colors.scss
+
+:root {
+    /* base vanilla white */
+    --surface-100: oklch(100% 0 80);
+    /* Emphasized */
+    --surface-modal: var(--elevation-4);
+
+    /* Interaction */
+    --motion-hover: var(--motion-fast);
+    --motion-press: var(--motion-fast);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --surface-default: var(--surface-10);
+        --text-primary-default: var(--text-primary-90);
+        --accent-default: var(--accent-70);
+    }
+}

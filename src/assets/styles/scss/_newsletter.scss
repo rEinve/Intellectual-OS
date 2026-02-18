@@ -1,0 +1,88 @@
+/* Realignment for newsletter-box.html */
+
+.newsletter-box {
+    @include grid-container(12); // Uses your 12-col mixin
+    background-color: oklch(from var(--surface-99) l c h / 0.3);
+    border-radius: var(--radius-container-lg);
+    border: 0.16rem solid var(--surface-99);
+    gap: var(--space-xl);
+
+    @include breakpoint(medium) {
+        padding: var(--space-xl);
+    }
+}
+
+.newsletter-box__image {
+    @include col-span(12); // Full width on mobile
+
+    @include breakpoint(medium) {
+        @include col-span(5); // 5/12 columns on tablet+
+    }
+
+    img {
+        @extend .aspect-standard; // Prevents image squishing
+        border-radius: var(--radius-media-md); // Nested optical rounding
+        @extend .motion-linger; // 600ms focus animation
+        object-fit: contain;
+    }
+}
+
+.newsletter-box {
+    &__content {
+        @include col-span(12);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: var(--space-m);
+
+        @include breakpoint(medium) {
+            @include col-span(7); // 7/12 columns on tablet+
+        }
+
+        h2 {
+            @extend .display-m; // Uses fluid step-5 scale
+            color: var(--text-primary-70); // High-emphasis hook
+            margin: 0;
+        }
+
+        p {
+            @extend .body-l; // Uses fluid step-1 scale
+            color: var(--text-primary-40); // Easier for reading
+            max-width: 60ch; // Optimal line length
+            margin: 0;
+        }
+    }
+}
+
+.newsletter-form {
+    &__content {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-s);
+        margin: 0;
+    }
+    &__row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-s);
+        margin: 0;
+    }
+    &__button {
+        max-width: 100%;
+    }
+    &__input {
+        flex: 1;
+        min-width: 334px;
+        background: var(--surface-95); // Subtle M3 surface tone
+        border: 2px solid transparent;
+        border-radius: var(--radius-control-md); //12px shape
+        padding: 0.8rem 1.2rem;
+        transition: all var(--motion-standard) var(--ease-standard); // Standard easing
+
+        &:focus {
+            background: var(--surface-100);
+            border-color: var(--accent-60); // Signature Unity Green
+            outline: none;
+        }
+    }
+}

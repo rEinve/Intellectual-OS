@@ -1,0 +1,144 @@
+.header {
+    background-color: var(--surface-95);
+    //border-bottom: 1px solid #e5e5e5;
+    padding: 1.2rem 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+    height: 80px;
+}
+
+/* Logo Section */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 18px;
+    font-weight: 500;
+    color: #282828;
+    text-decoration: none;
+    margin-right: 40px;
+}
+
+/* Left Navigation */
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    flex: 1;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    list-style: none;
+}
+
+.nav-links a {
+    color: #606060;
+    text-decoration: none;
+    font-size: 1.125rem;
+    font-weight: 600;
+    transition: color 0.2s;
+    white-space: nowrap;
+}
+
+.nav-links a:hover {
+    color: #282828;
+}
+
+/* Right Navigation */
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.feed-link {
+    color: #606060;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s;
+}
+
+.feed-link:hover {
+    color: #282828;
+}
+
+.search-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background 0.2s;
+}
+
+.search-btn:hover {
+    background: #f2f2f2;
+}
+
+.search-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.subscribe-btn {
+    background: #065fd4;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 18px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.subscribe-btn:hover {
+    background: #0856c8;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+
+    .nav-container {
+        padding: 0 12px;
+    }
+
+    .logo {
+        font-size: 14px;
+    }
+}
+
+//==========================================================================
+// BRAND
+//==========================================================================
+.navbar-brand {
+    display: block;
+    margin: 0;
+    padding: 0;
+
+    a {
+        padding: 0;
+    }
+
+    .img-fluid {
+        width: 64px;
+    }
+}

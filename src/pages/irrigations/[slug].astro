@@ -1,0 +1,15 @@
+---
+import PublicationLayout from "@layouts/PublicationLayout.astro";
+import { getCollection, render } from "astro:content";
+import { getEntryBySlug } from "astro:content";
+
+const { slug } = Astro.params;
+const entry = await getEntryBySlug("notes", slug);
+if (!entry) return Astro.redirect("/404");
+
+const { Content } = await entry.render();
+---
+
+<ReaderLayout activeSlug={slug}>
+  <Content />
+</ReaderLayout>

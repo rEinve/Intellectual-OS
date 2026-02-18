@@ -1,0 +1,84 @@
+.doc {
+  min-height: 100svh;
+  color: var(--text-color-20);
+
+  padding: clamp(1rem, 4vw, 2.5rem);
+
+  .doc__shell {
+    max-width: 78ch;
+    margin-inline: auto;
+  }
+
+  .doc__content {
+    font-family: var(--font-body, system-ui);
+    font-size: clamp(1rem, 1.1vw, 1.125rem);
+    line-height: 1.75;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.12;
+    margin: 0 0 var(--space-l);
+  }
+
+  h2, h3 {
+    margin-top: clamp(2rem, 4vw, 3rem);
+    margin-bottom: var(--space-s);
+    line-height: 1.2;
+  }
+
+  p { margin: 0 0 var(--space-m); }
+
+  a {
+    color: inherit;
+    text-underline-offset: 0.2em;
+    text-decoration-thickness: 0.08em;
+  }
+
+  hr {
+    border: 0;
+    height: 1px;
+    background: color-mix(in srgb, currentColor 14%, transparent);
+    margin: var(--space-xl) 0;
+  }
+
+  /* Tables: your big pain point */
+  .table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: var(--space-xl) 0;
+    border-radius: 16px;
+    border: 1px solid color-mix(in srgb, currentColor 10%, transparent);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 640px;
+  }
+  th, td {
+    padding: 0.875rem 1rem;
+    border-bottom: 1px solid color-mix(in srgb, currentColor 10%, transparent);
+    vertical-align: top;
+    text-align: left;
+  }
+  th {
+    position: sticky;
+    top: 0;
+    background: var(--surface);
+    font-weight: 650;
+  }
+
+  /* Code blocks (calm) */
+  pre {
+    padding: 1rem;
+    border-radius: 16px;
+    overflow-x: auto;
+    background: color-mix(in srgb, currentColor 6%, transparent);
+  }
+
+  /* Touch targets if you add UI later */
+  .tap {
+    min-height: 48px;
+    min-width: 48px;
+  }
+}

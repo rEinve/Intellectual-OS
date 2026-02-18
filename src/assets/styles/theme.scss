@@ -1,0 +1,13 @@
+/* Copy your partials into: src/styles/scss/ (same structure as your Vite theme)
+   then import them like your existing theme.scss does.
+*/
+//@use "./scss/mixin";
+@use "./scss/layout";
+@use "./scss/motion";
+@use "./scss/typesetting";
+
+/* Docs-only layer (reader styles) */
+@use "./scss/docs";
+@use "./scss/distill";
+@use "./typography.css";
+@use"./scss/workspace-board";

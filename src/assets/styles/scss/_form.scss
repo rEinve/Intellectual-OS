@@ -1,0 +1,93 @@
+/* src/scss/_form.scss */
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs); // Using your 0.5rem pause
+    width: 100%;
+
+    label {
+        @extend .label-m; // Inherits M3 label styles from _typesetting.scss
+        color: var(--text-primary-30); // High-emphasis label
+        margin-left: var(--space-xxs);
+    }
+
+    input {
+        appearance: none;
+        width: 100%;
+        border: 1px solid var(--text-primary-90); // Subtle "Outline" role
+        border-radius: var(
+            --radius-control-md
+        ); // Using your control-specific radius
+        padding: var(--space-m);
+        background: var(--surface);
+        color: var(--text-primary-10);
+        font-family: var(--font-body);
+        @extend .body-m;
+
+        // M3 State Layer: Hover
+        transition:
+            border-color var(--motion-fast) var(--ease-standard),
+            box-shadow var(--motion-fast) var(--ease-standard),
+            background-color var(--motion-fast) var(--ease-standard);
+
+        &::placeholder {
+            color: var(--text-primary-70);
+        }
+
+        &:hover {
+            border-color: var(--text-primary-40);
+            background-color: oklch(from var(--surface) l c h / 0.8);
+        }
+
+        // M3 State: Focus (Elevated)
+        &:focus {
+            outline: none;
+            border-color: var(--accent-60); // Using your "Unity" Green
+            border-width: 2px;
+            padding: calc(
+                var(--space-m) - 1px
+            ); // Compensate for border thickness
+            background: white;
+
+            // Elevation 3 gives it that "Floating" M3 feel
+            box-shadow: var(--elevation-3);
+        }
+    }
+}
+
+.form-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-m);
+    align-items: flex-end;
+
+    .field {
+        flex: 1;
+        min-width: 280px; // Slightly wider for better M3 ergonomics
+    }
+
+    .btn-submit {
+        @extend .motion-fast;
+        height: 56px; // M3 Standard Height for primary actions
+        background-color: var(--text-primary-20);
+        color: var(--surface);
+        border: none;
+        border-radius: var(
+            --radius-pill
+        ); // M3 buttons are typically fully rounded
+        padding: 0 var(--space-l);
+        cursor: pointer;
+
+        &:hover {
+            background-color: var(--text-primary-10);
+            box-shadow: var(--elevation-2);
+            transform: translateY(-1px);
+        }
+
+        &:active {
+            transform: translateY(0);
+            box-shadow: var(--elevation-1);
+        }
+    }
+}

@@ -1,0 +1,135 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+type Props = {
+  workspaceKey: string;
+  workspaceLabel: string;
+  description?: string;
+  entries: CollectionEntry<"notes">[];
+  subfolders: { folderSlug: string; count: number }[];
+};
+
+const { workspaceKey, workspaceLabel, description, entries, subfolders } = Astro.props;
+
+const distillAllHref = `/notes/${workspaceKey}/distill`;
+const distillDirectHref = `/notes/${workspaceKey}/distill?scope=direct`;
+
+// “Recent” without timestamps (deterministic): take last N by slug order
+const recentNotes = entries.filter(e => e.slug !== workspaceKey).slice(-10).reverse();
+---
+
+<section class="ws-board">
+  <header class="ws-header">
+    <div class="ws-title">
+      <p class="label-m ws-kicker">Workspace</p>
+      <h1 class="headline-l">{workspaceLabel}</h1>
+      {description ? <p class="body-m ws-desc">{description}</p> : null}
+    </div>
+
+    <div class="ws-actions" role="group" aria-label="Workspace actions">
+      <a class="ws-btn ws-btn--primary" href={distillAllHref}>
+        <span class="material-symbols-outlined" aria-hidden="true">auto_awesome</span>
+        Distill workspace
+      </a>
+      <a class="ws-btn" href={distillDirectHref}>
+        <span class="material-symbols-outlined" aria-hidden="true">filter_alt</span>
+        Direct only
+      </a>
+      <a class="ws-btn" href={`/notes/${workspaceKey}/`}>
+        <span class="material-symbols-outlined" aria-hidden="true">folder_open</span>
+        Browse
+      </a>
+    </div>
+  </header>
+
+  <div class="ws-grid">
+    <!-- Column A: Folders -->
+    <section class="ws-card" aria-label="Folders">
+      <header class="ws-card__header">
+        <h2 class="title-m">Folders</h2>
+        <p class="label-m ws-meta">{subfolders.length} groups</p>
+      </header>
+
+      <div class="ws-folderGrid">
+        {subfolders.slice(0, 12).map((f) => (
+          <a class="ws-folderTile" href={`/notes/${f.folderSlug}/`}>
+            <div class="ws-folderTile__icon" aria-hidden="true">
+              <span class="material-symbols-outlined">folder</span>
+            </div>
+            <div class="ws-folderTile__body">
+              <div class="ws-folderTile__name">{f.folderSlug.split("/").slice(-1)[0]}</div>
+              <div class="ws-folderTile__meta">{f.count} notes</div>
+            </div>
+            <span class="material-symbols-outlined ws-folderTile__chev" aria-hidden="true">chevron_right</span>
+          </a>
+        ))}
+      </div>
+
+      {subfolders.length > 12 ? (
+        <footer class="ws-card__footer">
+          <a class="ws-link" href={`/notes/${workspaceKey}/`}>View all folders</a>
+        </footer>
+      ) : null}
+    </section>
+
+    <!-- Column B: Production lanes -->
+    <section class="ws-card" aria-label="Production board">
+      <header class="ws-card__header">
+        <h2 class="title-m">Production board</h2>
+        <p class="label-m ws-meta">Calm pipeline, no friction</p>
+      </header>
+
+      <div class="ws-lanes">
+        <div class="ws-lane">
+          <div class="ws-lane__head">
+            <span class="label-m">Distill</span>
+            <span class="ws-pill">Fast</span>
+          </div>
+          <p class="body-m ws-muted">Extract clips and key blocks across the workspace.</p>
+          <a class="ws-lane__cta" href={distillAllHref}>Open distill</a>
+        </div>
+
+        <div class="ws-lane">
+          <div class="ws-lane__head">
+            <span class="label-m">Draft</span>
+            <span class="ws-pill">Structured</span>
+          </div>
+          <p class="body-m ws-muted">Turn distilled material into scripts, posts, slides.</p>
+          <a class="ws-lane__cta" href={distillAllHref}>Start from distill</a>
+        </div>
+
+        <div class="ws-lane">
+          <div class="ws-lane__head">
+            <span class="label-m">Publish</span>
+            <span class="ws-pill">Output</span>
+          </div>
+          <p class="body-m ws-muted">Export clean outputs (no CMS behavior).</p>
+          <span class="ws-lane__cta ws-muted">Coming soon</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Column C: Recent notes -->
+    <section class="ws-card" aria-label="Recent notes">
+      <header class="ws-card__header">
+        <h2 class="title-m">Recent notes</h2>
+        <p class="label-m ws-meta">Recent activity</p>
+      </header>
+
+      <ol class="ws-list">
+        {recentNotes.map((e) => (
+          <li class="ws-list__item">
+            <a class="ws-list__link" href={`/notes/${e.slug}/`}>
+              <span class="ws-list__title">{e.slug.split("/").slice(-1)[0]}</span>
+              <span class="ws-list__sub">{e.slug}</span>
+            </a>
+          </li>
+        ))}
+      </ol>
+
+      <footer class="ws-card__footer">
+        <a class="ws-link" href={`/notes/${workspaceKey}/distill`}>Distill from recent</a>
+      </footer>
+    </section>
+  </div>
+</section>

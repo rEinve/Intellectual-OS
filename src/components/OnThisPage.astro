@@ -1,0 +1,40 @@
+---
+type Heading = {
+  depth: number; // 1..6
+  slug: string;
+  text: string;
+};
+
+const {
+  headings = [],
+  title = "On this page",
+  minDepth = 2,
+  maxDepth = 3, // usually h2 + h3 is perfect for notes
+} = Astro.props as {
+  headings: Heading[];
+  title?: string;
+  minDepth?: number;
+  maxDepth?: number;
+};
+
+const items = headings
+  .filter((h) => h.depth >= minDepth && h.depth <= maxDepth && h.slug && h.text)
+  .map((h) => ({
+    ...h,
+    indent: Math.max(0, h.depth - minDepth),
+  }));
+---
+
+{items.length ? (
+  <nav class="toc" aria-label={title}>
+    <div class="toc__title">{title}</div>
+
+    <ul class="toc__list">
+      {items.map((h) => (
+        <li class={`toc__item toc__item--indent-${h.indent}`}>
+          <a class="toc__link" href={`#${h.slug}`}>{h.text}</a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+) : null}

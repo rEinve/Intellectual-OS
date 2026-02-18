@@ -1,0 +1,528 @@
+/* =========================================================
+   TYPESETTING SYSTEM
+   Inter Variable — Editorial / Material-ish
+   ========================================================= */
+:root {
+    /* Text Primary (neutral gray base #606161 → oklch(60% 0.01 250)) */
+    --text-color-0: oklch(0% 0 250);
+    --text-color-10: oklch(15% 0.01 250);
+    --text-color-20: oklch(25% 0.01 250);
+    --text-color-30: oklch(35% 0.01 250);
+    --text-color-40: oklch(45% 0.01 250);
+    --text-color: oklch(55% 0.01 250);
+    --text-color-60: oklch(60% 0.01 250);
+    --text-color-70: oklch(70% 0.01 250);
+    --text-color-80: oklch(80% 0.01 250);
+    --text-color-90: oklch(90% 0.01 250);
+    --text-color-95: oklch(95% 0.01 250);
+    --text-color-99: oklch(99% 0.01 250);
+    --text-color-100: oklch(100% 0 250);
+
+    /* Accent (muted green‑gray base #748779 → oklch(60% 0.07 150)) */
+    --accent-0: oklch(0% 0 150);
+    --accent-10: oklch(15% 0.07 150);
+    --accent-20: oklch(25% 0.07 150);
+    --accent-30: oklch(35% 0.07 150);
+    --accent-40: oklch(45% 0.07 150);
+    --accent-50: oklch(55% 0.07 150);
+    --accent: oklch(60% 0.07 150);
+    /* base */
+    --accent-70: oklch(70% 0.07 150);
+    --accent-80: oklch(80% 0.07 150);
+    --accent-90: oklch(90% 0.07 150);
+    --accent-95: oklch(95% 0.07 150);
+    --accent-99: oklch(99% 0.07 150);
+    --accent-100: oklch(100% 0 150);
+
+    /* -------------------------
+   Root Typography Defaults
+-------------------------- */
+
+    @font-face {
+        font-family: "Inter Variable";
+        src: url("../fonts/Inter-VariableFont_opsz\,wght.ttf") format("woff2-variations");
+        font-weight: 100 900;
+        /* REQUIRED for font-weight mapping */
+        font-style: normal;
+        font-display: swap;
+    }
+
+    --font-body: "Inter Variable";
+
+    @font-face {
+        font-family: "MaterialSymbolsRounded";
+        src: url("../fonts/MaterialSymbolsRounded-VariableFont_FILL,GRAD,opsz,wght.ttf") format("woff2-variations");
+        font-weight: normal;
+        font-style: normal;
+        font-size: 20px;
+        /* calm default */
+        line-height: 1;
+        display: inline-block;
+        vertical-align: middle;
+        letter-spacing: normal;
+        text-transform: none;
+        white-space: nowrap;
+        word-wrap: normal;
+        direction: ltr;
+
+        /* Material Symbols variable axes */
+        font-variation-settings:
+            "FILL"0,
+            "wght"400,
+            "GRAD"0,
+            "opsz"20;
+    }
+
+    --font-icon: "MaterialSymbolsRounded";
+    /* --- Breakpoints --- */
+    --breakpoint-mobile: 600px;
+    --breakpoint-tablet: 900px;
+    --breakpoint-desktop: 1200px;
+
+    /* --- Fluid Scale Setup (Perfect Fourth) --- */
+    /* Transitions from 16px on mobile to 18px on desktop */
+    --step-0: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+    /* Scale up using a fluid multiplier */
+    --step-1: calc(var(--step-0) * 1.333);
+    --step-2: calc(var(--step-1) * 1.333);
+    --step-3: calc(var(--step-2) * 1.333);
+    --step-4: calc(var(--step-3) * 1.333);
+    --step-5: calc(var(--step-4) * 1.333);
+    --step-6: calc(var(--step-5) * 1.333);
+
+    /* --- Line Heights --- */
+    --lh-display: 1.1;
+    --lh-headline: 1.2;
+    --lh-title: 1.4;
+    --lh-body: 1.5;
+
+    /* sizes */
+    --text-body: 1.06rem;
+    --text-small: 0.92rem;
+
+    /* weights */
+    --w-body: 420;
+    --w-strong: 600;
+    --w-title: 720;
+
+    /* tracking */
+    --track-tight: -0.02em;
+    --track-normal: -0.005em;
+
+    /* leading */
+    --lead-body: 1.75;
+    --lead-title: 1.15;
+}
+
+html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+}
+
+body {
+    color: var(--text-color);
+    font-family: var(--font-body);
+    line-height: var(--lh-body);
+    letter-spacing: var(--ls-body);
+}
+
+
+/* High Emphasis (The Hooks) */
+.display-l,
+.display-m,
+.display-s,
+.headline-l {
+    color: var(--text-color-70); // Using your Tonal 60
+    font-weight: 700;
+    line-height: var(--lh-display);
+    letter-spacing: var(--ls-display);
+}
+
+/* Medium Emphasis (The Meat) */
+.body-l,
+.body-m {
+    color: var(--text-color-40); // Tone 40: easier for long reading
+}
+
+/* Metadata (The Date) */
+.label-l,
+.label-m,
+.label-s {
+    /* Decorative/Metadata: Often uses the Brand Accent or a muted tint */
+    color: var(--accent-40);
+}
+
+.accent-link {
+    /* Interactive: Your signature "Unity" green */
+    color: var(--accent);
+
+    &:hover {
+        color: var(--accent-80);
+    }
+}
+
+/* Large, Cinematic Hooks */
+.display-l {
+    font-size: var(--step-6);
+}
+
+.display-m {
+    font-size: var(--step-5);
+}
+
+.display-s {
+    font-size: var(--step-4);
+}
+
+.headline-m,
+.headline-s,
+.title-l {
+    color: var(--text-color-60);
+    font-variation-settings:
+        "wght"600,
+        "opsz"28,
+        "GRAD"0,
+        "FILL"0;
+    line-height: var(--lh-headline);
+    letter-spacing: var(--ls-headline);
+}
+
+/* Structural Section Headers */
+.headline-l {
+    font-size: var(--step-3);
+}
+
+.headline-m {
+    font-size: var(--step-2);
+}
+
+.headline-s {
+    font-size: var(--step-1);
+}
+
+/* Card Titles & Navigation */
+title-m,
+label-l,
+label-s {
+    font-variation-settings:
+        "wght"600,
+        "opsz"20,
+        "GRAD"0,
+        "FILL"0;
+    line-height: var(--lh-label);
+    letter-spacing: var(--ls-label);
+}
+
+.title-l {
+    font-size: var(--step-1);
+}
+
+.title-m {
+    font-size: var(--step-0);
+}
+
+/* Metadata (Dates, Tags, Small Caps) */
+.label-l {
+    font-size: 0.875rem;
+}
+
+.label-s {
+    font-size: 0.75rem;
+    font-weight: var(--weight-medium);
+}
+
+hr {
+    border: none;
+    /* Removes default border/inset style */
+    height: 1px;
+    /* Sets the thickness of the line */
+    background-color: var(--text-color);
+    /* Sets the color of the line */
+    width: 100%;
+    /* Sets the width of the line */
+    margin: var(--step-4) 0;
+    /* Centers the line horizontally and adds vertical spacing */
+}
+
+
+.body-l {
+    font-size: var(--step-1); // ~21px
+}
+
+/* Standard UI / Descriptions */
+.body-m {
+    font-size: var(--step-0); // 16px
+}
+
+/* Dense info / Sidebar notes */
+.body-s {
+    font-size: var(--text-sm); // ~12px
+}
+
+//==========================================================================
+// HEADINGS — MATERIAL 3–ISH (EDITORIAL)
+//==========================================================================
+
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6 {
+    font-family: var(--font-body); // Inter everywhere
+    margin: 0;
+    font-feature-settings: "liga", "kern";
+    text-wrap: balance;
+}
+
+h1,
+.h1 {
+    font-size: clamp(2.8rem, 5vw, 2.25rem);
+    font-weight: 600;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    color: var(--text-color-70);
+}
+
+h2,
+.h2 {
+    font-size: clamp(2.25rem, 3vw, 2rem);
+    font-weight: 600;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    color: var(--text-color-70);
+}
+
+h3,
+.h3 {
+    font-size: clamp(1.4rem, 2vw, 1.25rem);
+    font-weight: 600;
+    line-height: 1.25;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-color-60);
+}
+
+h4,
+.h4 {
+    font-size: 1.15rem;
+    font-weight: 500;
+    line-height: 1.4;
+    color: var(--text-color-60);
+}
+
+h5,
+.h5,
+h6,
+.h6 {
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-color-50);
+}
+
+p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin: 0 0 1.4em;
+    color: var(--text-color);
+    max-width: 68ch;
+}
+
+a {
+    color: var(--accent-40) !important;
+    text-decoration: none;
+    font-weight: 400;
+    transition: color 180ms ease;
+
+    &:hover {
+        color: var(--accent) !important;
+        text-decoration: underline;
+        text-underline-offset: 0.15em;
+    }
+}
+
+blockquote {
+    margin: 3rem 0;
+    padding-left: 1.5rem;
+    border-left: 3px solid oklch(80% 0.02 140);
+    font-style: normal;
+    color: var(--accent-30);
+
+    p {
+        font-size: 1.2rem;
+        line-height: 1.6;
+    }
+}
+
+strong {
+    font-variation-settings: "wght"600;
+    color: var(--primary-30);
+}
+
+//==========================================================================
+// TYPOGRAPHY HELPERS — MATERIAL 3–ISH (EDITORIAL)
+//==========================================================================
+
+/* Intro / Lede paragraph */
+.lead {
+    font-size: clamp(1.15rem, 1.5vw, 1.35rem);
+    line-height: 1.65;
+    font-weight: 400;
+    color: var(--text-color-50);
+    max-width: 65ch;
+}
+
+.meta {
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: oklch(55% 0.01 140);
+}
+
+.caption {
+    display: block;
+    margin-top: 0.75rem;
+    font-size: 0.85rem;
+    line-height: 1.4;
+    color: oklch(50% 0.01 140);
+}
+
+.eyebrow {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: oklch(45% 0.02 140);
+}
+
+.btn,
+.button {
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.small {
+    color: var(--accent-10);
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1rem;
+}
+
+/* -------------------------
+   Reading Container
+-------------------------- */
+
+/* -------------------------
+   Dark Mode Refinement
+-------------------------- */
+
+.dark .article {
+    font-variation-settings:
+        "wght"440,
+        "opsz"15;
+}
+
+.dark .article>p:first-of-type,
+.dark .article .lede {
+    font-variation-settings:
+        "wght"480,
+        "opsz"16;
+    color: oklch(92% 0.02 var(--hue-primary));
+}
+
+.dark .article .pull-quote {
+    border-left-color: oklch(70% 0.04 var(--hue-primary));
+}
+
+/* =========================================================
+   RESPONSIVE TYPESETTING SYSTEM (Material 3 Adaptive)
+   ========================================================= */
+
+/* 1. ADAPTIVE DISPLAY ROLES */
+.display-l {
+    /* Mobile: Step 5 | Desktop: Step 6 */
+    font-size: clamp(var(--step-5), 4vw + 1rem, var(--step-6));
+    line-height: var(--lh-display);
+    letter-spacing: -0.025em;
+}
+
+.display-m {
+    font-size: clamp(var(--step-4), 3vw + 1rem, var(--step-5));
+}
+
+.display-s {
+    font-size: clamp(var(--step-3), 2vw + 1rem, var(--step-4));
+}
+
+/* 2. ADAPTIVE HEADLINES */
+.headline-l {
+    font-size: var(--step-3);
+
+    @media (max-width: 600px) {
+        font-size: var(--step-2);
+        /* Scale down for mobile */
+    }
+}
+
+/* 3. BODY TEXT OPTIMIZATION */
+p,
+.body-m {
+    font-size: var(--step-0);
+    line-height: var(--lh-body);
+    word-break: break-word;
+    max-width: 62ch;
+    /* Optimal line length for readability */
+
+    /* Material 3 recommends slightly heavier weights on mobile for legibility */
+    @media (max-width: 600px) {
+        font-variation-settings:
+            "wght"450,
+            "opsz"14;
+    }
+}
+
+.toc {
+    font-size: var(--text-small);
+
+    &__title {
+        font-size: calc(var(--text-small) - 0.12);
+    }
+}
+
+
+/* 4. OPTICAL SIZING REFINEMENT */
+/* Variable fonts allow us to tweak "opsz" based on screen size */
+html {
+    -webkit-font-smoothing: antialiased;
+
+    @media (min-width: 1200px) {
+        /* Larger screens can handle finer details */
+        font-variation-settings: "opsz"18;
+    }
+
+    @media (max-width: 600px) {
+        /* Small screens need thicker strokes for small text */
+        font-variation-settings: "opsz"12;
+    }
+}

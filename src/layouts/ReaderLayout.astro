@@ -1,0 +1,74 @@
+---
+import TopNav from "../components/TopNav.astro";
+import SidebarTree from "../components/SidebarTree.astro";
+import Breadcrumbs from "../components/Breadcrumbs.astro";
+import { buildNotesTree } from "../lib/notesTree";
+import { getCollection } from "astro:content";
+import "/src/assets/styles/theme.scss";
+import "/src/assets/styles/reading.css";
+
+const activeSlug = (Astro.props.activeSlug ?? "").toString();
+
+const entries = await getCollection("notes");
+const items = entries.map((e) => ({
+  title: e.data?.title ?? "",
+  slug: e.slug,
+  path: e.slug.split("/").slice(0, -1),
+}));
+const tree = buildNotesTree(items);
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>{title}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+
+  <body>
+<div class="app">
+  <TopNav appName="NoteBook" />
+
+  <div class="shell">
+    <aside class="side" aria-label="Notes navigation">
+      <SidebarTree node={tree} activeSlug={activeSlug} />
+    </aside>
+
+    <main class="reader">
+      <Breadcrumbs slug={activeSlug} />
+      <article class="prose">
+        <slot />
+      </article>
+    </main>
+  </div>
+</div>
+</body>
+</html>
+
+<style lang="scss">
+.shell {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  gap: 20px;
+  padding: 12px 16px 40px;
+
+  @media (min-width: 840px) { padding: 16px 24px 56px; }
+}
+
+.side {
+  position: sticky;
+  top: 72px; /* below sticky topnav */
+  align-self: start;
+  max-height: calc(100dvh - 88px);
+  overflow: auto;
+  padding: 8px;
+  border-radius: 16px;
+  border: 1px solid color-mix(in oklab, currentColor 12%, transparent);
+}
+
+.reader {
+  max-width: 78ch;
+  padding-top: 6px;
+}
+
+.prose :where(p, ul, ol, blockquote, pre, table, hr) { margin-block: 0.9em; }
+</style>

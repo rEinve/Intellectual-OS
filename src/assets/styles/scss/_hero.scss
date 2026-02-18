@@ -1,0 +1,85 @@
+.hero-inner {
+  margin: 0;
+  //padding: 0 1.5rem;
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  gap: clamp(1rem, 3vw, 1rem);
+  align-items: center;
+
+}
+
+.featured-post {
+  width: 100%;
+}
+
+.post-kicker {
+  display: inline-block;
+  margin-bottom: 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.post-title {
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+
+.post-dek {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  max-width: 48ch;
+  margin-bottom: 1.5rem;
+}
+
+.post-meta {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+
+}
+
+.post-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn-primary {
+
+  padding: 0.75rem 1.25rem;
+  border-radius: 999px;
+  font-weight: 500;
+}
+
+.btn-primary:hover {
+  background: var(--accent-strong);
+}
+
+.btn-secondary {
+  color: var(--text-primary);
+  padding: 0.75rem 1.25rem;
+  border-radius: 999px;
+}
+
+.hero-visual img {
+  width: 100%;
+  height: auto;
+  border-radius: 1.5rem;
+}
+
+@media (max-width: 900px) {
+  .hero-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-visual {
+    order: -1;
+  }
+}
+
+.toned {
+  padding: clamp(2rem, 3vw, 3rem);
+  border-radius: 2rem;
+
+}

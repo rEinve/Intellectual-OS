@@ -1,0 +1,61 @@
+//==========================================================================
+// FEATURED SECTION
+//==========================================================================
+.featured-habits {
+    background: url("/assets/images/posititity-on-air.jpg") no-repeat left
+        bottom;
+    background-clip: cover;
+
+    &__content {
+        display: flex;
+        width: 50%;
+        grid-template-columns: 1fr 1fr;
+        justify-content: center;
+        max-width: 50%;
+        margin: 0 auto;
+        padding-left: calc(3rem);
+    }
+
+    &__text {
+        padding: calc(var(--space-l) * 2);
+        text-align: left;
+
+        p {
+            margin-bottom: 3rem;
+        }
+
+        h3 {
+            color: var(--surface-99);
+            margin-bottom: calc(2rem);
+        }
+    }
+}
+
+//==================================
+// RESPONSIVE STYLES
+//==================================
+
+@include breakpoint(medium) {
+    .featured-habits {
+        // Mobile: The image becomes a full background with a color overlay
+        background-image: url("/images/posititity-on-air.jpg") no-repeat;
+        background-size: cover; // Cover the entire area
+        background-position: 20% center;
+
+        .container {
+            justify-content: center; // Center the content container
+        }
+
+        &__content {
+            width: 100%; // Let the content take up the full width
+            padding-left: 0;
+            text-align: center; // Center the text and button
+
+            h2 {
+                text-align: center;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+    }
+}

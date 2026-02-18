@@ -1,0 +1,989 @@
+body {
+    margin: 0;
+}
+
+.reading-container {
+    max-width: var(--measure);
+    margin: 5rem auto;
+    padding: 0 1.25rem;
+}
+
+
+.article-header {
+    margin-bottom: 3rem;
+}
+
+.article-header time {}
+
+.article-body>*+* {
+    margin-top: 1.4em;
+}
+
+
+/* TABLE BASE */
+article table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* Horizontal scroll on small screens */
+article table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Cells */
+article th,
+article td {
+    padding: 0.6rem 0.75rem;
+    border-bottom: 1px solid var(--border);
+    text-align: left;
+    vertical-align: top;
+}
+
+/* Header */
+article thead th {
+    opacity: 0.85;
+    border-bottom: 2px solid var(--border);
+}
+
+/* Zebra (very subtle) */
+article tbody tr:nth-child(even) td {
+    background: var(--surface);
+}
+
+/* Numeric columns */
+article td[data-align="right"],
+article th[data-align="right"] {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+
+article caption {}
+
+.table-wide {
+    margin-left: calc(-1 * (100vw - var(--measure)) / 2);
+    margin-right: calc(-1 * (100vw - var(--measure)) / 2);
+}
+
+
+/* Sticky header for long tables */
+@media (min-width: 640px) {
+    article thead th {
+        position: sticky;
+        top: 0;
+        background: var(--bg);
+        z-index: 1;
+    }
+}
+
+.reader {
+    max-width: 78ch;
+    margin-inline: auto;
+    padding: 24px 16px;
+    overflow-x: hidden; // prevents page-level horizontal scroll
+
+    @media (min-width: 600px) {
+        padding: 40px 24px;
+    }
+
+    @media (min-width: 840px) {
+        padding: 56px 24px;
+    }
+}
+
+.prose {
+
+    // Flow rhythm for rendered markdown
+    :where(p, ul, ol, blockquote, pre, table, hr) {
+        margin-block: 0.9em;
+    }
+
+    :where(h1, h2, h3) {
+        margin-block: 1.2em 0.6em;
+    }
+
+    :where(ul, ol) {
+        padding-inline-start: 1.2em;
+    }
+
+    :where(li) {
+        margin-block: 0.35em;
+    }
+
+    // Make links feel “reader”, not “web”
+    :where(a) {
+        text-underline-offset: 0.18em;
+    }
+
+    pre {
+        max-width: 100%;
+        overflow-x: hidden;
+        /* no horizontal scrollbar */
+        white-space: pre-wrap;
+        /* wrap */
+        word-break: break-word;
+        /* fallback */
+        overflow-wrap: anywhere;
+        /* modern: breaks long URLs */
+    }
+
+    code {
+        white-space: inherit;
+    }
+
+}
+
+.crumbs {
+    margin: 0 0 16px;
+}
+
+.crumbs__list {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap; // allows graceful wrapping on small screens
+    gap: 4px;
+    margin: 0;
+    padding: 0;
+    list-style: none; // prevent vertical stacking
+}
+
+.crumbs__item {
+    display: inline-flex;
+    align-items: center;
+}
+
+.crumbs__sep {
+    opacity: 0.55;
+    margin: 0 6px;
+}
+
+.crumbs__link {
+    text-decoration: none;
+    min-height: 32px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.crumbs__current {
+    opacity: 0.85;
+}
+
+.table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-block: 1em;
+    border-radius: 12px;
+}
+
+/* keep table readable and not squished */
+.table-wrap>table {
+    width: max-content;
+    min-width: 100%;
+    border-collapse: collapse;
+}
+
+/* optional: calm cell spacing */
+.table-wrap :where(th, td) {
+    padding: 10px 12px;
+    text-align: left;
+    vertical-align: top;
+    white-space: nowrap; // remove if you want wrapping cells
+}
+
+/* optional: sticky header for long tables */
+.table-wrap thead th {
+    position: sticky;
+    top: 0;
+}
+
+
+/* Keep tables from breaking the reader width */
+.prose :where(table) {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-collapse: collapse;
+    margin-block: 1em;
+    border-radius: 12px;
+}
+
+/* Make the scroll area feel intentional */
+.prose :where(table) {
+    border-radius: 12px;
+}
+
+/* Give cells breathing room */
+.prose :where(th, td) {
+    padding: 10px 14px;
+    text-align: left;
+    vertical-align: top;
+    white-space: nowrap; // remove if you prefer wrapping
+}
+
+/* Optional: prevent squished columns */
+.prose :where(table) {
+    width: max-content;
+    min-width: 100%;
+}
+
+/* Base */
+.prose :where(.callout) {
+    border-radius: 16px;
+    padding: 12px 14px;
+    margin-block: 1em;
+}
+
+.prose :where(.callout__head),
+.prose :where(.callout__summary) {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 48px;
+    /* touch target */
+    padding: 0;
+    margin: 0;
+    cursor: default;
+}
+
+.prose :where(details.callout > .callout__body) {
+    padding-top: 6px;
+}
+
+/* Folding UX */
+.prose :where(details.callout) {
+    padding: 0;
+}
+
+.prose :where(details.callout > summary.callout__summary) {
+    list-style: none;
+    padding: 12px 14px;
+    border-radius: 16px;
+    cursor: pointer;
+}
+
+.prose :where(details.callout > summary.callout__summary::-webkit-details-marker) {
+    display: none;
+}
+
+.prose :where(details.callout > .callout__body) {
+    padding: 0 14px 12px;
+}
+
+/* Label */
+.prose :where(.callout__label) {
+    font-weight: 600;
+    line-height: 1.2;
+    opacity: 0.92;
+}
+
+.prose :where(.callout__body) {
+    opacity: 0.95;
+}
+
+/* Minimal “icon dot” (no icon set needed) */
+.prose :where(.callout__icon) {
+    width: 10px;
+    height: 10px;
+    border-radius: 999px;
+    flex: 0 0 auto;
+    opacity: 0.9;
+}
+
+/* Variants – keep it calm.
+   Plug these into your M3 tokens if you have them (primary/surface/on-surface roles). */
+.prose :where(.callout) {
+    background: color-mix(in oklab, currentColor 6%, transparent);
+    border: 1px solid color-mix(in oklab, currentColor 18%, transparent);
+}
+
+.prose :where(.callout[data-callout="note"]) .callout__icon,
+.prose :where(.callout[data-callout="info"]) .callout__icon {
+    background: currentColor;
+}
+
+.prose :where(.callout[data-callout="warning"]),
+.prose :where(.callout[data-callout="caution"]) {
+    background: color-mix(in oklab, currentColor 8%, transparent);
+    border-color: color-mix(in oklab, currentColor 22%, transparent);
+}
+
+.prose :where(.callout[data-callout="tip"]),
+.prose :where(.callout[data-callout="success"]) {
+    background: color-mix(in oklab, currentColor 7%, transparent);
+    border-color: color-mix(in oklab, currentColor 20%, transparent);
+}
+
+.prose :where(.callout[data-callout="danger"]),
+.prose :where(.callout[data-callout="error"]) {
+    background: color-mix(in oklab, currentColor 9%, transparent);
+    border-color: color-mix(in oklab, currentColor 26%, transparent);
+}
+
+.noteView {
+    max-width: 68ch;
+    margin: 0 auto;
+    padding: 0;
+    padding-top: 4rem;
+}
+
+/* Sidebar container + independent scrolling */
+
+
+.notesSidebar {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: auto;
+    border-right: 1px solid var(--outline-variant, rgba(0, 0, 0, .12));
+    padding: 12px 8px;
+}
+
+.notesMain {
+    height: 100vh;
+    overflow: auto;
+}
+
+/* Density modes (CSS only) */
+.density--comfortable {
+    --row-h: 34px;
+    --pad-x: 10px;
+    --pad-y: 6px;
+    --font-size: 14px;
+    --indent: 14px;
+}
+
+.density--compact {
+    --row-h: 28px;
+    --pad-x: 10px;
+    --pad-y: 4px;
+    --font-size: 13px;
+    --indent: 12px;
+}
+
+/* Tree base */
+.tree {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: var(--font-size);
+}
+
+/* Indentation by level */
+.tree--level-0 {
+    padding-left: 0;
+}
+
+.tree--level-1 {
+    padding-left: calc(var(--indent) * 1);
+}
+
+.tree--level-2 {
+    padding-left: calc(var(--indent) * 2);
+}
+
+.tree--level-3 {
+    padding-left: calc(var(--indent) * 3);
+}
+
+/* Unlimited nesting: after 3 it’ll still look fine due to <ul> inheriting padding; add more if you want */
+
+.tree__item {
+    margin: 0;
+    padding: 0;
+}
+
+/* Folder (details/summary) */
+.tree__folder {
+    margin: 0;
+}
+
+.tree__summary {
+    display: flex;
+    align-items: center;
+    min-height: var(--row-h);
+    padding: var(--pad-y) var(--pad-x);
+    border-radius: 12px;
+    cursor: default;
+    user-select: none;
+    color: var(--on-surface, #111);
+    outline: none;
+}
+
+/* Remove default marker */
+.tree__summary::-webkit-details-marker {
+    display: none;
+}
+
+.tree__summary::marker {
+    content: "";
+}
+
+/* Caret indicator (subtle) */
+.tree__caret {
+    width: 18px;
+    display: inline-flex;
+    justify-content: center;
+    opacity: 0.8;
+}
+
+.tree__caret::before {
+    content: "▸";
+    transform: translateY(-1px);
+    transition: transform 160ms ease;
+}
+
+.tree__folder[open]>.tree__summary .tree__caret::before {
+    transform: rotate(90deg) translateX(1px);
+}
+
+/* Notes (links) */
+.tree__link {
+    display: flex;
+    align-items: center;
+    min-height: var(--row-h);
+    padding: var(--pad-y) var(--pad-x);
+    border-radius: 12px;
+    text-decoration: none;
+    color: var(--on-surface, #111);
+}
+
+.tree__file {
+    width: 18px;
+    opacity: 0.35;
+    display: inline-flex;
+    justify-content: center;
+}
+
+/* Calm hover + active */
+.tree__summary:hover,
+.tree__link:hover {
+    background: color-mix(in oklab, var(--surface-99), var(--text-color-99) 6%);
+}
+
+.tree__link.is-active {
+    background: color-mix(in oklab, var(--surface-99), var(--text-color-99) 12%);
+    color: var(--on-surface, #111);
+}
+
+/* Focus (visible but calm) */
+.tree__summary:focus-visible,
+.tree__link:focus-visible {
+    outline: 2px solid color-mix(in oklab, var(--primary, #6750a4), white 20%);
+    outline-offset: 2px;
+}
+
+/* Touch target safety (even desktop) */
+.tree__summary,
+.tree__link {
+    min-height: max(var(--row-h), 48px);
+}
+
+/* Label truncation (explorer feel) */
+.tree__label {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+/* Desktop-only contract */
+.app {}
+
+/* 2-column layout */
+.notesShell {
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    /* 320–360px target */
+    height: calc(100vh - var(--topnav-h, 56px));
+    /* if TopNav sets a token, great; else fallback */
+}
+
+/* Sidebar: sticky feel + independent scroll */
+.notesSidebar {
+    height: 100%;
+    overflow: auto;
+    border-right: 1px solid var(--outline-variant, rgba(0, 0, 0, 0.12));
+    padding: 12px 8px;
+}
+
+/* Main content: independent scroll */
+.notesMain {
+    height: 100%;
+}
+
+.notesMainInner {
+    margin-inline: auto;
+    padding: 0;
+}
+
+/* Density modes (CSS-only switch) */
+.density--comfortable {
+    --row-h: 34px;
+    --pad-x: 10px;
+    --pad-y: 6px;
+    --font-size: 14px;
+    --indent: 14px;
+}
+
+.density--compact {
+    --row-h: 28px;
+    --pad-x: 10px;
+    --pad-y: 4px;
+    --font-size: 13px;
+    --indent: 12px;
+}
+
+.folderView,
+.shelf {
+    padding-top: 4rem;
+    width: 60%;
+    margin: 0 auto;
+    display: grid;
+    gap: 28px;
+}
+
+.shelf__header {
+    margin: 0 0 16px;
+}
+
+.shelf__title {
+    margin: 0;
+}
+
+.shelf__sub {
+    margin: 6px 0 0;
+    opacity: 0.8;
+}
+
+.shelf__groupHead {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    margin: 0 0 10px;
+}
+
+.shelf__groupTitle {
+    margin: 0;
+}
+
+.shelf__groupMeta {
+    margin: 0;
+    opacity: 0.7;
+}
+
+.cards {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: 1fr;
+
+    @media (min-width: 600px) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @media (min-width: 840px) {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+.card {
+    display: grid;
+    gap: 6px;
+    padding: 14px;
+    border-radius: 16px;
+    text-decoration: none;
+    min-height: 72px;
+    border: 1px solid color-mix(in oklab, currentColor 12%, transparent);
+    background: color-mix(in oklab, currentColor 4%, transparent);
+}
+
+.card:focus-visible {
+    box-shadow: 0 0 0 2px currentColor;
+}
+
+.card__title {
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.card__meta {
+    opacity: 0.7;
+    font-size: 0.95em;
+}
+
+.folderView {
+    display: grid;
+    gap: 1rem;
+}
+
+.folderView__head {
+    display: grid;
+    gap: 0.25rem;
+    padding: 0.25rem 0.25rem 0;
+}
+
+.folderView__title {
+    margin: 0;
+    color: var(--text-primary-70);
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    font-size: clamp(1.6rem, 2vw, 2.2rem);
+}
+
+.folderView__meta {
+    margin: 0;
+    color: var(--text-primary-50);
+}
+
+.folderView__list {
+    display: grid;
+    gap: 0.6rem;
+}
+
+.folderItem {
+    display: grid;
+    gap: 0.2rem;
+    padding: 0.9rem 0.95rem;
+    border-radius: 16px;
+    border: 1px solid oklch(var(--shadow-dna) / 0.10);
+    background: var(--surface);
+    box-shadow: var(--elevation-0);
+    text-decoration: none;
+    min-height: 48px;
+}
+
+.folderItem:hover {
+    box-shadow: var(--elevation-1);
+}
+
+.folderItem__title {
+    color: var(--text-primary-70);
+    font-weight: 650;
+    letter-spacing: -0.01em;
+}
+
+.folderItem__meta {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    color: var(--text-primary-50);
+    font-size: 0.95rem;
+}
+
+.folderItem__desc {
+    opacity: 0.9;
+}
+
+.search {
+    position: relative;
+    margin-bottom: 16px;
+}
+
+.search__input {
+    width: 100%;
+    min-height: 48px;
+    padding: 0 16px;
+    border-radius: 16px;
+    border: 1px solid currentColor;
+    background: transparent;
+}
+
+.search__results {
+    margin-top: 8px;
+    display: grid;
+    gap: 6px;
+}
+
+.search__item {
+    display: block;
+    padding: 10px 14px;
+    border-radius: 12px;
+    text-decoration: none;
+}
+
+.noteShell {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 380px;
+    gap: 32px;
+    align-items: start;
+}
+
+/* Your existing centered measure stays inside the article */
+.noteArticle {
+    min-width: 0;
+}
+
+/* Sticky “On this page” */
+.noteToc {
+    position: sticky;
+    top: 16px;
+    max-height: calc(100vh - 32px);
+    overflow: auto;
+    padding: 8px 0;
+}
+
+/* ToC styling (calm, low contrast, no marketing) */
+.toc {
+    border-left: 1px solid var(--outline-variant, rgba(0, 0, 0, .12));
+    padding-left: 16px;
+}
+
+.toc__title {
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--on-surface-variant, rgba(0, 0, 0, .55));
+    margin: 4px 0 10px;
+}
+
+.toc__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.toc__item {
+    margin: 0;
+}
+
+.toc__link {
+    display: block;
+    padding: 6px 8px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: var(--on-surface, #111);
+    opacity: 0.86;
+    line-height: 1.35;
+}
+
+.toc__link:hover {
+    background: color-mix(in oklab, var(--surface, #fff), var(--on-surface, #111) 6%);
+    opacity: 1;
+}
+
+.toc__link:focus-visible {
+    outline: 2px solid color-mix(in oklab, var(--primary, #6750a4), white 20%);
+    outline-offset: 2px;
+}
+
+/* indentation */
+.toc__item--indent-1 .toc__link {
+    padding-left: 18px;
+    opacity: 0.78;
+}
+
+.toc__item--indent-2 .toc__link {
+    padding-left: 28px;
+    opacity: 0.72;
+}
+
+.topnav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid color-mix(in oklab, currentColor 14%, transparent);
+    background-color: var(--surface-95);
+}
+
+.topnav__inner {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+}
+
+.topnav__brand {
+    display: inline-flex;
+    align-items: center;
+    min-height: 48px;
+    padding: 0 10px;
+    border-radius: 14px;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.topnav__name {
+    font-weight: 650;
+    letter-spacing: -0.01em;
+}
+
+/* Segmented quick switch */
+.seg {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px;
+    border-radius: 999px;
+    border: 1px solid color-mix(in oklab, currentColor 14%, transparent);
+    background: color-mix(in oklab, currentColor 4%, transparent);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    max-width: 44vw;
+    /* stays calm on small screens */
+}
+
+.seg__item {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    padding: 0 12px;
+    border-radius: 999px;
+    text-decoration: none;
+    white-space: nowrap;
+    opacity: 0.82;
+}
+
+.seg__item.is-active {
+    opacity: 1;
+    font-weight: 600;
+    background: color-mix(in oklab, currentColor 10%, transparent);
+}
+
+/* Search on the right */
+.topnav__search {
+    margin-left: auto;
+    width: min(560px, 100%);
+}
+
+
+.noteRail {
+    position: sticky;
+    top: 16px;
+    max-height: calc(100vh - 32px);
+    overflow: auto;
+    padding: 8px 0;
+}
+
+.distill {
+    max-width: 1160px;
+    margin-inline: auto;
+    padding: 24px;
+}
+
+.distill__header {
+    margin: 0 0 18px;
+}
+
+.distill__title {
+    margin: 0 0 6px;
+}
+
+.distill__meta {
+    margin: 0;
+    opacity: .7;
+}
+
+.outputs {
+    border: 1px solid var(--outline-variant, rgba(0, 0, 0, .12));
+    background: color-mix(in oklab, var(--surface, #fff), var(--on-surface, #111) 2%);
+    border-radius: 18px;
+    padding: 14px;
+}
+
+.outputs__title {
+    font-size: 12px;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    opacity: .7;
+    margin: 2px 0 10px;
+}
+
+.outputs__grid {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.out__name {
+    font-weight: 600;
+    opacity: .9;
+    margin-bottom: 6px;
+}
+
+.out__box {
+    margin: 0;
+    padding: 12px;
+    border-radius: 14px;
+    border: 1px solid var(--outline-variant, rgba(0, 0, 0, .10));
+    background: color-mix(in oklab, var(--surface, #fff), var(--on-surface, #111) 3%);
+}
+
+.distill__rule {
+    margin: 20px 0;
+    border: 0;
+    border-top: 1px solid var(--outline-variant, rgba(0, 0, 0, .12));
+}
+
+.bundle {
+    display: grid;
+    gap: 16px;
+}
+
+.bundle__note {
+    border: 1px solid var(--outline-variant, rgba(0, 0, 0, .12));
+    background: color-mix(in oklab, var(--surface, #fff), var(--on-surface, #111) 2%);
+    border-radius: 18px;
+    padding: 14px;
+}
+
+.bundle__head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.bundle__title {
+    text-decoration: none;
+    color: var(--on-surface, #111);
+    font-weight: 650;
+    opacity: .92;
+}
+
+.bundle__title:hover {
+    text-decoration: underline;
+}
+
+.bundle__count {
+    font-size: 12px;
+    opacity: .65;
+    border: 1px solid var(--outline-variant, rgba(0, 0, 0, .16));
+    padding: 2px 8px;
+    border-radius: 999px;
+}
+
+.bundle__clips {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+}
+
+.clip__meta {
+    display: inline-flex;
+    text-decoration: none;
+    color: var(--on-surface, #111);
+    opacity: .75;
+    padding: 4px 8px;
+    border-radius: 10px;
+}
+
+.clip__meta:hover {
+    background: color-mix(in oklab, var(--surface, #fff), var(--on-surface, #111) 6%);
+    opacity: 1;
+}
+
+.clip__text {
+    margin: 6px 0 0;
+    padding: 10px 12px;
+    border-radius: 14px;
+    border: 1px solid var(--outline-variant, rgba(0, 0, 0, .10));
+    background: color-mix(in oklab, var(--surface, #fff), var(--on-surface, #111) 3%);
+    white-space: pre-wrap;
+    word-break: break-word;
+}

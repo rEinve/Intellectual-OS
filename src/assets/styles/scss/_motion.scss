@@ -1,0 +1,83 @@
+:root {
+  /* Transitions */
+  /* Standard easing */
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+
+  /* Emphasized (attention) */
+  --ease-emphasized: cubic-bezier(0.3, 1, 0.3, 1);
+
+  /* Decelerate (exit / settle) */
+  --ease-decelerate: cubic-bezier(0, 0, 0, 1);
+
+  /* Accelerate (enter quickly) */
+  --ease-accelerate: cubic-bezier(0.3, 0, 1, 1);
+  /* Standard motion */
+
+  --motion-fast: 120ms;
+  --motion-standard: 200ms; // buttons, UI chrome
+  --motion-slow: 420ms; // cards, images, layout
+  --motion-emphasized: 320ms;
+  --motion-linger: 600ms; // hero, gallery focus
+
+  /* Emphasized */
+  --motion-emphasized: 400ms;
+
+  /* Layout */
+  --motion-expand: var(--motion-standard);
+  --motion-collapse: var(--motion-standard);
+
+  /* Navigation / emphasis */
+  --motion-page-enter: var(--motion-emphasized);
+  --motion-modal-enter: var(--motion-emphasized);
+}
+
+//Motion utility classes 
+.motion-fast {
+  transition-duration: var(--motion-fast);
+  transition-timing-function: var(--ease-standard);
+}
+
+//Landing fix (your “brutal snap” problem)
+
+.motion-settle {
+  transition-property: transform, opacity;
+  transition-duration: var(--motion-standard);
+  transition-timing-function: var(--ease-standard);
+}
+
+//Base (opt-in, not global)
+.motion {
+  transition-property: transform, opacity, color, background-color, border-color, box-shadow;
+  transition-duration: var(--motion-standard);
+  transition-timing-function: var(--ease-standard);
+}
+
+.motion-slow {
+  transition-property: transform, opacity, color, background-color, border-color, box-shadow;
+  transition-duration: var(--motion-slow);
+  transition-timing-function: var(--ease-standard);
+}
+
+.motion-linger {
+  transition-property: transform, opacity, color, background-color, border-color, box-shadow;
+  transition-duration: var(--motion-linger);
+  transition-timing-function: var(--ease-standard);
+}
+
+//Emphasized motion (hero cards, gallery items)
+.motion-emphasized {
+  transition-duration: var(--motion-emphasized);
+  transition-timing-function: var(--ease-emphasized);
+}
+
+
+img {
+  width: 100%;
+  height: auto;
+  @extend .motion-linger;
+
+  &:hover {
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: scale(1.02);
+  }
+}

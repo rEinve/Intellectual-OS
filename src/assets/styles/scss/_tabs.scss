@@ -1,0 +1,96 @@
+//==========================================================================
+// NAVIGATE YOUR JOURNEY (TABS COMPONENT)
+//==========================================================================
+
+// Tab Navigation Container
+.nav-tabs {
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  padding: 0;
+  margin: 0 auto; // Center the container
+  background-color: var(--surface-99);
+  border-radius: 999px;
+  //max-width: 999px; // Ensures the white background fits the content
+  //border: 1px solid $light-gray;
+  position: relative;
+  z-index: 1;
+
+
+  // Individual Tab Link
+  .nav-link {
+    display: flex;
+    justify-content: space-between;
+    padding: calc(0.75rem) calc(1.5rem);
+    border-radius: var(--radius-pill);
+    text-decoration: none;
+    font-weight: var(--weight-bold);
+    color: hsl(130, 8%, 40%);
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+
+    :hover {
+      border: 0;
+    }
+
+    // Active state for the tab
+    &.active {
+      background-color: hsl(130, 8%, 30%) !important;
+      color: hsl(0, 0%, 100%);
+      border: 0;
+      border-radius: var(--radius-pill);
+    }
+  }
+}
+
+// Tab Content Styling
+.tab-content {
+  //background-color: $white;
+  padding: calc(3rem) calc(2rem) calc(1rem);
+  margin-top: calc(-2rem); // Pulls the content up behind the tabs
+}
+
+// Individual Tab Pane (content area)
+.tab-pane {
+  display: none; // Hide all panes by default
+
+  &.active {
+    display: block; // Show only the active one
+  }
+}
+
+// Article List inside Tab Panes
+.article-list {
+  list-style: none;
+}
+
+.article-item {
+  display: flex;
+  gap: calc(1.5rem);
+  padding-block: calc(1rem); // Vertical padding
+  border-bottom: 1px solid var(--surface-50);
+
+  &:last-child {
+    border-bottom: none; // Remove border from the last item
+  }
+}
+
+.article-date {
+  font-size: calc(0.9rem);
+  color: var(--text-primary-50);
+  flex-shrink: 0; // Prevents the date from wrapping
+  width: calc(100px);
+}
+
+.article-title {
+  font-size: calc(1.1rem);
+  margin-bottom: calc(0.25rem);
+  color: var(--text-primary-30);
+}
+
+.article-excerpt {
+  font-size: calc(0.9rem);
+  color: var(--text-primary-50);
+}

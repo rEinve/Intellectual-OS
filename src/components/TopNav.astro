@@ -1,0 +1,42 @@
+---
+import SearchBox from "./SearchBox.astro";
+import { QUICK_SWITCH } from "../lib/quickSwitch";
+
+type Props = {
+  appName?: string;
+  showSearch?: boolean;
+};
+
+const { appName = "Notebook", showSearch = true } = Astro.props;
+
+const pathname = Astro.url.pathname;
+
+// active when current path starts with href (so /notes/projects/x highlights Projects)
+const isActive = (href: string) =>
+  href !== "/" && pathname.startsWith(href);
+---
+
+<header class="topnav" role="banner">
+  <div class="topnav__inner">
+    <a class="topnav__brand" href="/notes/" aria-label="Go to Notes home">
+      <span class="topnav__name h2">{appName}</span>
+    </a>
+
+    <nav class="seg" aria-label="Quick switch">
+      {QUICK_SWITCH.map((item) => (
+        <a
+          href={item.href}
+          class:list={["seg__item", isActive(item.href) && "is-active"]}
+        >
+          {item.label}
+        </a>
+      ))}
+    </nav>
+
+    {showSearch && (
+      <div class="topnav__search" role="search">
+        <SearchBox />
+      </div>
+    )}
+  </div>
+</header>

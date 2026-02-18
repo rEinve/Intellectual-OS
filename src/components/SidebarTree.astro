@@ -1,0 +1,61 @@
+---
+// src/components/SidebarTree.astro
+import type { TreeNode } from "@lib/notesTree";
+import { normalizeSlug } from "@lib/notesTree";
+
+type Props = {
+  tree: TreeNode; // usually the root folder from buildNotesTree()
+  activeSlug: string; // e.g. "projects/irrigation/pump-design"
+  basePath?: string; // default "/notes"
+  level?: number; // internal recursion
+};
+
+const {
+  tree,
+  activeSlug,
+  basePath = "/notes",
+  level = 0,
+} = Astro.props;
+
+const active = normalizeSlug(activeSlug);
+
+function isFolderOpen(folderPrefix: string) {
+  const p = normalizeSlug(folderPrefix);
+  if (!p) return true; // root open
+  return active === p || active.startsWith(p + "/");
+}
+---
+{tree.kind === "folder" ? (
+  <ul class={`tree tree--level-${level}`} role={level === 0 ? "tree" : undefined}>
+    {tree.children.map((node) => (
+      <li class="tree__item" role="none">
+        {node.kind === "folder" ? (
+          <details class="tree__folder" open={isFolderOpen(node.slug)}>
+            <summary class="tree__summary">
+              <span class="tree__caret" aria-hidden="true"></span>
+              <span class="tree__label">{node.name}</span>
+            </summary>
+
+            <Astro.self tree={node} activeSlug={activeSlug} basePath={basePath} level={level + 1} />
+          </details>
+        ) : (
+          (() => {
+            const noteSlug = normalizeSlug(node.slug);
+            const isActive = noteSlug === active;
+
+            return (
+              <a
+                class={`tree__link ${isActive ? "is-active" : ""}`}
+                href={`${basePath}/${node.slug}`}
+                aria-current={isActive ? "page" : undefined}
+              >
+                <span class="tree__file" aria-hidden="true">•</span>
+                <span class="tree__label">{node.name}</span>
+              </a>
+            );
+          })()
+        )}
+      </li>
+    ))}
+  </ul>
+) : null}

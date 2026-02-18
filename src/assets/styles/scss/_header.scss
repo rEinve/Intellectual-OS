@@ -1,0 +1,14 @@
+//==========================================================================
+// SITE HEADER & RESPONSIVE NAVIGATION
+//==========================================================================
+
+.header {
+  padding: 1.5 calc(var(--space-l) * 2);
+  background-color: var(--surface-99);
+  margin: 0;
+  width: 100%;
+
+  .row {
+    margin: 0;
+  }
+}

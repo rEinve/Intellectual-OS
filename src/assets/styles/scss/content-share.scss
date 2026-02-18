@@ -1,0 +1,32 @@
+.share-block {
+  margin: 4rem 0;
+}
+
+.share-label {
+  display: block;
+  margin-bottom: 1rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  color: #666;
+}
+
+.share-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.share-actions button {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid #ddd;
+  background: transparent;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.share-actions button:hover {
+  border-color: #111;
+  background: rgba(0, 0, 0, 0.03);
+}

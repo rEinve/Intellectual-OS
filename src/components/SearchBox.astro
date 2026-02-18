@@ -1,0 +1,18 @@
+---
+import { initSearch } from "@scripts/search";
+import searchInitUrl from "@scripts/search-init.ts?url";
+---
+
+<div class="search" data-search>
+  <input
+    type="search"
+    placeholder="Search notes…"
+    class="search__input"
+    aria-label="Search notes"
+    autocomplete="off"
+    spellcheck="false"
+  />
+  <div class="search__results" role="listbox" aria-label="Search results"></div>
+</div>
+
+<script type="module" src={searchInitUrl}></script>

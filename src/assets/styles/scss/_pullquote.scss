@@ -1,0 +1,138 @@
+.pullquote {
+    blockquote {
+
+        &::before,
+        &::after {
+            font-size: fun.type-em(34, var(--font--size--base--mobile));
+            display: inline;
+
+            @include mix.respond-to(above, tablet) {
+                @include mix.fluidFont(calc(var(--font--mobileMult) * 34), 34);
+            }
+        }
+
+        p {
+            font-size: fun.type-em(34, var(--font--size--base--mobile));
+            line-height: 1.2;
+            margin-top: 0;
+            margin-bottom: 0;
+
+            @include mix.respond-to(above, tablet) {
+                @include mix.fluidFont(calc(var(--font--mobileMult) * 34), 34);
+            }
+        }
+    }
+
+    .source {
+        font-size: fun.type-em(22, var(--font-size--base--mobile));
+        font-weight: var(--font--weight--semibold);
+        margin-top: fun.space-pos("default");
+
+        @include mix.respond-to(above, tablet) {
+            @include mix.fluidFont(calc(var(--font--mobileMult) * 22), 22);
+        }
+    }
+
+    .is-style-left {
+        border-top: 4px solid fun.color-color("black");
+        border-bottom: 4px solid fun.color-color("black");
+        margin-top: fun.space-pos("tight");
+        margin-bottom: fun.space-pos("default");
+        padding-top: fun.space-pos("default");
+        padding-bottom: fun.space-pos("default");
+
+        @include mix.respond-to(above, desktop) {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+    }
+
+    .is-style-stacked,
+    .is-style-full,
+    .is-style-mono {
+        margin-top: calc(#{fun.space-pos("wide")} * 2);
+        margin-bottom: calc(#{fun.space-pos("wide")} * 2);
+        margin-left: auto;
+        margin-right: auto;
+
+        @include mix.respond-to(above, tablet) {
+            max-width: 75%;
+        }
+
+        blockquote p {
+            font-size: fun.type-em(30, var(--font--size--base--mobile));
+            font-weight: var(--font--weight--thin);
+
+            &::before,
+            &::after {
+                font-size: fun.type-em(30, var(--font--size--base--mobile));
+                font-weight: var(--font--weight--thin);
+            }
+
+            @include mix.respond-to(above, tablet) {
+                @include mix.fluidFont(calc(var(--font--mobileMult) * 50), 50);
+
+                &::before,
+                &::after {
+                    @include mix.fluidFont(calc(var(--font--mobileMult) * 50),
+                    50);
+                }
+            }
+        }
+    }
+
+    .is-style-stacked {
+        &.has-text-align-left {
+            border-left: 4px solid var(--wp--preset--color--black);
+            padding: fun.space-pos("default") 0 fun.space-pos("default") fun.space-pos("wide");
+
+            .rtl & {
+                border-left: none;
+                border-right: 4px solid var(--wp--preset--color--black);
+                padding: fun.space-pos("default") fun.space-pos("wide") fun.space-pos("default") 0;
+            }
+        }
+    }
+
+    .is-style-full,
+    .is-style-mono {
+        text-align: center;
+        padding: 0 8%;
+
+        @include mix.respond-to(above, tablet) {
+            padding: 0;
+        }
+    }
+
+    .is-style-mono {
+
+        blockquote::before,
+        blockquote::after {
+            content: "";
+            display: block;
+            width: 1px;
+            height: 18vh;
+            border-left: 1px solid;
+            border-right: 1px solid;
+            margin: fun.space-pos("wide") auto;
+        }
+
+        .source::after {
+            margin-top: calc(#{fun.space-pos("wide")} * 2);
+        }
+    }
+
+    &.has-background {
+        padding-top: fun.space-pos("wide");
+        padding-bottom: fun.space-pos("wide");
+        margin-top: fun.space-pos("wide");
+        margin-bottom: fun.space-pos("wide");
+    }
+}
+
+@media (max-width: 1278px) and (min-width: 992px) {
+    .wp-block-column.column--quote.pullquote.flex-basis-25 {
+        flex: 0 1 calc(25 * 1%);
+    }
+}

@@ -1,0 +1,214 @@
+.material-symbols-outlined {
+  font-family: var(--font-icon);
+  font-weight: normal;
+  font-style: normal;
+  font-size: 20px; /* calm default */
+  line-height: 1;
+  display: inline-block;
+  vertical-align: middle;
+  letter-spacing: normal;
+  text-transform: none;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+
+  /* Material Symbols variable axes */
+  font-variation-settings:
+    "FILL" 0,
+    "wght" 400,
+    "GRAD" 0,
+    "opsz" 20;
+}
+
+
+.ws-board {
+  padding: var(--space-l) 0;
+}
+
+.ws-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-l);
+  padding: 0 var(--space-l) var(--space-l);
+}
+
+.ws-kicker {
+  opacity: 0.8;
+}
+
+.ws-desc {
+  max-width: 72ch;
+  margin-top: var(--space-xs);
+}
+
+.ws-actions {
+  display: flex;
+  gap: var(--space-s);
+  flex-wrap: wrap;
+}
+
+.ws-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: 0.6rem 0.9rem;
+  border-radius: var(--radius-full);
+  background: oklch(from var(--surface-95) l c h / 0.7);
+  box-shadow: var(--surface-raised);
+  text-decoration: none;
+  color: var(--on-surface);
+  min-height: 48px; /* touch target */
+}
+
+.ws-btn--primary {
+  background: oklch(from var(--surface-90) l c h / 0.85);
+  box-shadow: var(--surface-floating);
+}
+
+.ws-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1.4fr 1.1fr;
+  gap: var(--space-l);
+  padding: 0 var(--space-l);
+}
+
+.ws-card {
+  background: oklch(from var(--surface-99) l c h / 0.75);
+  border-radius: var(--radius-l);
+  box-shadow: var(--surface-raised);
+  border: 1px solid oklch(from var(--surface-90) l c h / 0.8);
+  padding: var(--space-m);
+  min-width: 0;
+}
+
+.ws-card__header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-s);
+  margin-bottom: var(--space-m);
+}
+
+.ws-meta {
+  opacity: 0.7;
+}
+
+.ws-card__footer {
+  margin-top: var(--space-m);
+  padding-top: var(--space-s);
+  border-top: 1px solid oklch(from var(--surface-90) l c h / 0.7);
+}
+
+.ws-link {
+  text-decoration: none;
+  color: var(--on-surface);
+  opacity: 0.85;
+}
+
+.ws-folderGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-s);
+}
+
+.ws-folderTile {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--space-s);
+  padding: var(--space-s);
+  border-radius: var(--radius-m);
+  text-decoration: none;
+  color: var(--on-surface);
+  background: oklch(from var(--surface-95) l c h / 0.55);
+  min-height: 56px;
+}
+
+.ws-folderTile__icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-pill);
+  display: grid;
+  place-items: center;
+  background: oklch(from var(--surface-90) l c h / 0.7);
+}
+
+.ws-folderTile__name {
+  font-variation-settings: "wght" 600, "opsz" 16, "GRAD" 0, "FILL" 0;
+}
+
+.ws-folderTile__meta {
+  opacity: 0.7;
+  font-size: 0.9em;
+}
+
+.ws-folderTile__chev {
+  opacity: 0.65;
+}
+
+.ws-lanes {
+  display: grid;
+  gap: var(--space-s);
+}
+
+.ws-lane {
+  padding: var(--space-m);
+  border-radius: var(--radius-m);
+  background: oklch(from var(--surface-95) l c h / 0.6);
+  border: 1px solid oklch(from var(--surface-90) l c h / 0.7);
+}
+
+.ws-lane__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-xs);
+}
+
+.ws-pill {
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius-full);
+  background: oklch(from var(--surface-90) l c h / 0.8);
+  font-size: 0.85em;
+  opacity: 0.9;
+}
+
+.ws-muted {
+  opacity: 0.75;
+}
+
+.ws-lane__cta {
+  display: inline-block;
+  margin-top: var(--space-s);
+  text-decoration: none;
+  color: var(--on-surface);
+  opacity: 0.9;
+}
+
+.ws-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: var(--space-xs);
+}
+
+.ws-list__link {
+  display: grid;
+  gap: 0.1rem;
+  padding: var(--space-s);
+  border-radius: var(--radius-m);
+  text-decoration: none;
+  color: var(--on-surface);
+  background: oklch(from var(--surface-95) l c h / 0.55);
+}
+
+.ws-list__title {
+  font-variation-settings: "wght" 600, "opsz" 16, "GRAD" 0, "FILL" 0;
+}
+
+.ws-list__sub {
+  opacity: 0.7;
+  font-size: 0.9em;
+}

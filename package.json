@@ -1,0 +1,32 @@
+{
+  "name": "technological-telescope",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "predev": "node ./src/scripts/build-notes-index.js",
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "prebuild": "node ./src/scripts/build-notes-index.js",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/starlight": "^0.37.6",
+    "astro": "^5.6.1",
+    "fuse.js": "^7.1.0",
+    "hast-util-to-string": "^3.0.1",
+    "rehype-autolink-headings": "^7.1.0",
+    "rehype-sanitize": "^6.0.0",
+    "rehype-slug": "^6.0.0",
+    "rehype-wrap-all": "^1.1.0",
+    "remark-wiki-link": "^2.0.1",
+    "sharp": "^0.34.2",
+    "slugify": "^1.6.6",
+    "starlight-theme-rapide": "^0.5.2",
+    "unist-util-visit": "^5.1.0"
+  },
+  "devDependencies": {
+    "sass-embedded": "^1.97.3"
+  }
+}

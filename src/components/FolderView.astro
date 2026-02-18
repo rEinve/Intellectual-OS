@@ -1,0 +1,54 @@
+---
+import { getCollection } from "astro:content";
+
+type Props = {
+  folder: { slug: string; title: string; count: number } | null;
+  folderSlug: string;
+  // notes is optional now (kept for compatibility)
+  notes?: any[];
+};
+
+const { folder, folderSlug } = Astro.props;
+
+// Prefer passed notes if provided, otherwise fetch (server-first)
+const notes = Array.isArray(Astro.props.notes)
+  ? Astro.props.notes
+  : await getCollection("notes");
+
+// IMPORTANT: your old filter only matched top-level folders.
+// Make it work for nested folders too:
+const prefix = folderSlug ? `${folderSlug}/` : "";
+
+const inFolder = notes
+  .filter((n) => n.slug === folderSlug || n.slug.startsWith(prefix))
+  .sort((a, b) => {
+    const da = new Date(a.data?.updated ?? a.data?.date ?? 0).valueOf();
+    const db = new Date(b.data?.updated ?? b.data?.date ?? 0).valueOf();
+    return db - da;
+  });
+
+const title = folder?.title ?? folderSlug;
+---
+<section class="folderView">
+  <header class="folderView__head">
+    <h1 class="folderView__title">{title}</h1>
+    <p class="folderView__meta">{inFolder.length} notes</p>
+  </header>
+  <div class="folderView__list cards">
+    {inFolder.map((n) => {
+      const t = n.data?.title ?? n.slug.split("/").slice(-1)[0].replace(/-/g, " ");
+      const href = `/notes/${n.slug}/`;
+      const d = n.data?.updated ?? n.data?.date ?? null;
+      return (
+        <a class="folderItem card" href={href}>
+          <div class="folderItem__title">{t}</div>
+          <div class="folderItem__meta">
+            {d ? <span class="folderItem__date">{String(d)}</span> : <span class="folderItem__date">—</span>}
+            {n.data?.description ? <span class="folderItem__desc">{n.data.description}</span> : null}
+          </div>
+        </a>
+      );
+    })}
+  </div>
+</section>
+

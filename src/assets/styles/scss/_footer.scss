@@ -1,0 +1,163 @@
+//==========================================================================
+// FOOTER
+//==========================================================================
+
+.site-footer {
+  background-color: oklch(from var(--surface-80) l c h/0.3);
+  color: var(--text-primary-60);
+  padding: calc(4rem) 0 calc(2rem) 0;
+  font-size: calc(0.9rem);
+}
+
+
+// UPDATED: Main footer is now a 2-column grid
+.footer-main {
+  display: grid;
+
+  // Create 2 columns. The right side gets ~1.5x the space of the left.
+  grid-template-columns: 1fr 1.5fr;
+  gap: calc(3rem);
+  padding-bottom: calc(2rem);
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    /* Stack columns on smaller screens */
+  }
+}
+
+// NEW: This container holds the 3 link lists and is a grid itself
+.footer-links-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); // 3 equal columns
+  gap: calc(3rem);
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    /* Stack columns on smaller screens */
+  }
+}
+
+.footer-column  {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+  .bottom-brand {
+    display: flex;
+    grid-template-columns: 8rem 1fr 20rem;
+    align-items: center;
+    gap: 1.5rem;
+
+    .logo {
+      width: calc(60px);
+      height: calc(60px);
+      margin: 0;
+    }
+
+    .brand-copy {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+    }
+  }
+
+  p {
+    margin-bottom: calc(0.25rem);
+    line-height: 1.4;
+  }
+}
+
+.footer-column__title {
+  font-size: calc(1rem);
+  font-weight: var(--weight-bold);
+  color: var(--text-primary-60);
+  margin-bottom: calc(1rem);
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    margin-bottom: calc(0.75rem);
+    display: inline;
+  }
+
+  a {
+    color: var(--text-primary-50);
+    text-decoration: none;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: var(--accent-40);
+    }
+  }
+}
+
+.social-links {
+  display: flex;
+  gap: var(--space-m);
+  /* 1rem spacing */
+  align-items: center;
+
+  a {
+    display: flex;
+  }
+
+  a:hover {
+    color: var(--accent-80);
+    /* Your warm growth accent */
+    transform: translateY(-0.25rem);
+    /* The 4px Sovereign Lift */
+  }
+
+}
+
+.social-links-font {
+  display: flex;
+  gap: var(--space-m);
+  /* 1rem / 16px */
+  align-items: center;
+
+  a {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    /* M3 Standard Touch Target (40px) */
+
+
+    a:hover {
+      color: var(--accent-80);
+      /* Your warm 'Growth' color */
+      background-color: var(--surface-95);
+
+    }
+  }
+}
+
+// Bottom part of the footer (hr and legal links)
+.footer-bottom {
+  padding-top: calc(2rem);
+  border-top: 1px solid var(--text-primary-80);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.footer-bottom__links {
+  a {
+    display: inline;
+    margin: 0 .251rem;
+    color: var(--text-primary-80);
+    text-decoration: none;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: var(--accent-40);
+    }
+
+  }
+}

@@ -1,0 +1,56 @@
+/* The TOC Container */
+.post-toc {
+  /* Occupies the empty left gutter */
+  position: sticky;
+  margin-right: -18rem;
+  top: 10rem;
+  /* Aligns with the user's eye level */
+  height: fit-content;
+  padding-right: var(--space-l);
+  display: none;
+  /* Hidden on mobile */
+}
+
+@media (min-width: 1024px) {
+  .post-toc {
+    display: block;
+    float: right;
+  }
+}
+
+.post-toc h2 {
+  font-family: var(--font-label);
+  font-size: var(--step--1);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: var(--space-m);
+}
+
+.post-toc ul {
+  list-style: none;
+  padding: 0;
+  border-left: 1px solid var(--surface-80);
+  /* Vertical guide line */
+}
+
+.post-toc li {
+  margin-bottom: var(--space-s);
+}
+
+.post-toc a {
+  text-decoration: none;
+  font-size: var(--step--1);
+  color: var(--text-soft);
+  padding-left: var(--space-m);
+  display: block;
+  transition: color var(--duration-short) var(--ease-standard);
+}
+
+.post-toc a:hover {
+  color: var(--accent-80);
+  border-left: 2px solid var(--accent-80);
+  /* Highlight effect */
+  margin-left: -1px;
+  /* Offset the border change */
+}

@@ -1,0 +1,71 @@
+//==========================================================================
+// SCSS MIXINS
+//==========================================================================
+/* src/scss/_vars.scss */
+
+// Material 3 Official Breakpoints
+$m3-compact: 600px; // Phone
+$m3-medium: 840px; // Tablet
+$m3-expanded: 1200px; // Desktop
+$m3-large: 1600px; // Ultra-wide
+
+/* src/scss/_mixins.scss */
+
+@mixin breakpoint($size) {
+    @if $size ==medium {
+        // Tablets and Foldables (M3 Medium)
+        @media (min-width: #{$m3-compact}) {
+            @content;
+        }
+    } @else if $size ==expanded {
+        // Laptops and Desktops (M3 Expanded)
+        @media (min-width: #{$m3-medium}) {
+            @content;
+        }
+    } @else if $size ==large {
+        // Large Screens
+        @media (min-width: #{$m3-expanded}) {
+            @content;
+        }
+    } @else if $size ==extra-large {
+        // Ultra-wide
+        @media (min-width: #{$m3-large}) {
+            @content;
+        }
+    } @else {
+        // Fallback for custom pixel inputs
+        @media (min-width: #{$size}) {
+            @content;
+        }
+    }
+}
+
+@mixin glass-vanilla($opacity: var(--glass-opacity)) {
+    background: color-mix(
+        in srgb,
+        var(--surface) #{$opacity * 100%},
+        transparent
+    );
+    backdrop-filter: blur(12px) saturate(150%);
+
+    /* In dark mode, we make the border subtle and "Inner-Glow" style */
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Update to _mixin.scss */
+
+@mixin grid-container($columns: 12) {
+    display: grid;
+    grid-template-columns: repeat($columns, minmax(0, 1fr));
+    column-gap: var(--space-l); // Using your "m" space (1.25rem) as default gutter
+
+    @include breakpoint(expanded) {
+        column-gap: var(--space-xxl); // "l" space (2rem) for larger screens
+    }
+}
+
+// Helper to handle column spans easily
+@mixin col-span($span, $total: 12) {
+    grid-column: span #{$span} / span #{$span};
+}
