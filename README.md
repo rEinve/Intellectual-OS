@@ -75,9 +75,9 @@ Recommended package.json setup:
 ```json
 {
   "scripts": {
-    "predev": "node scripts/build-notes-index.js",
+    "predev": "node src/scripts/build-notes-index.js",
     "dev": "astro dev",
-    "prebuild": "node scripts/build-notes-index.js",
+    "prebuild": "node src/scripts/build-notes-index.js",
     "build": "astro build"
   }
 }
