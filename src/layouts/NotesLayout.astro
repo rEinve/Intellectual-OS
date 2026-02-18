@@ -5,46 +5,41 @@ import { getCollection } from "astro:content";
 import { buildNotesTree } from "@lib/notesTree";
 import "@assets/styles/theme.scss";
 import "@assets/styles/reading.css";
-
 // If you still need it later, fix the path:
 // import SearchBox from "@components/SearchBox.astro";
-
 const {
-  title = "Notes",
-  activeSlug = "", // page passes this (recommended)
+title = "Notes",
+activeSlug = "", // page passes this (recommended)
 } = Astro.props;
-
 // Build tree once at build time (SSR/build step)
 const entries = await getCollection("notes");
 const tree = buildNotesTree(entries);
-
 // If a page forgets to pass activeSlug, we can try to infer from params when used on /notes/[...slug]
 const inferred = typeof Astro.params?.slug === "string" ? Astro.params.slug : "";
 const currentSlug = activeSlug || inferred;
 ---
-
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8" />
     <title>{title}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-  </head>
+</head>
 
-  <body>
+<body>
     <div class="app">
-      <TopNav appName="NoteBook" />
-
-      <div class="notesShell density--comfortable">
-        <aside class="notesSidebar" aria-label="Notes navigation">
-          <SidebarTree tree={tree} activeSlug={currentSlug} basePath="/notes" />
-        </aside>
-
-        <main class="notesMain" id="content">
-          <div class="notesMainInner">
-            <slot />
-          </div>
-        </main>
-      </div>
+        <TopNav appName="NoteBook" />
+        <div class="notesShell density--comfortable">
+            <aside class="notesSidebar" aria-label="Notes navigation">
+                <SidebarTree tree={tree} activeSlug={currentSlug} basePath={import.meta.env.BASE_URL} />
+            </aside>
+            <main class="notesMain" id="content">
+                <div class="notesMainInner">
+                    <slot />
+                </div>
+            </main>
+        </div>
     </div>
-  </body>
+</body>
+
 </html>

@@ -4,6 +4,7 @@ import { rehypeTablesScroll } from "./src/lib/rehypeTablesScroll";
 import { rehypeObsidianCallouts } from "./src/lib/rehypeObsidianCallouts"
 import rehypeSlug from "rehype-slug";
 import rehypeSanitize from "rehype-sanitize";
+import relativeLinks from "astro-relative-links";
 
 //import starlight from '@astrojs/starlight';
 //import starlightThemeRapide from 'starlight-theme-rapide'
@@ -12,6 +13,9 @@ import rehypeSanitize from "rehype-sanitize";
 import path from "path";
 
 export default defineConfig({
+  integrations: [relativeLinks()],
+  // recommended for directory-style output:
+  trailingSlash: "always",
     vite: {
         resolve: {
             alias: {

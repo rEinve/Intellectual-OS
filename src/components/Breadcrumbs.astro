@@ -44,14 +44,14 @@ const next = idx >= 0 && idx < siblings.length - 1 ? siblings[idx + 1] : null;
 
     <footer class="noteView__pager" aria-label="In-folder navigation">
       {prev ? (
-        <a class="pager pager--prev" href={`/notes/${prev.slug}/`}>
+        <a class="pager pager--prev" href={`/${prev.slug}/`}>
           <span class="pager__k">Previous</span>
           <span class="pager__t">{prev.data?.title ?? humanize(prev.slug.split("/").at(-1) ?? "")}</span>
         </a>
       ) : <span />}
 
       {next ? (
-        <a class="pager pager--next" href={`/notes/${next.slug}/`}>
+        <a class="pager pager--next" href={`/${next.slug}/`}>
           <span class="pager__k">Next</span>
           <span class="pager__t">{next.data?.title ?? humanize(next.slug.split("/").at(-1) ?? "")}</span>
         </a>

@@ -1,11 +1,11 @@
 ---
-import TopNav from "../components/TopNav.astro";
-import SidebarTree from "../components/SidebarTree.astro";
-import Breadcrumbs from "../components/Breadcrumbs.astro";
-import { buildNotesTree } from "../lib/notesTree";
+import TopNav from "@components/TopNav.astro";
+import SidebarTree from "@components/SidebarTree.astro";
+import Breadcrumbs from "@components/Breadcrumbs.astro";
+import { buildNotesTree } from "@lib/notesTree";
 import { getCollection } from "astro:content";
-import "/src/assets/styles/theme.scss";
-import "/src/assets/styles/reading.css";
+import "@assets/styles/theme.scss";
+import "@assets/styles/reading.css";
 
 const activeSlug = (Astro.props.activeSlug ?? "").toString();
 

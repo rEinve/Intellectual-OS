@@ -1,6 +1,7 @@
 ---
 import NotesLayout from "@layouts/NotesLayout.astro";
 import { getCollection } from "astro:content";
+const base = import.meta.env.BASE_URL
 
 const entries = await getCollection("notes");
 
@@ -50,7 +51,7 @@ const DAILY_MAX = 14;
               const title = e.data?.title ?? titleFromSlug(e.slug);
               const folder = folderFromSlug(e.slug);
               return (
-                <a class="card" role="listitem" href={`/notes/${e.slug}`}>
+                <a class="card" role="listitem" href={`/${e.slug}/`}>
                   <div class="card__title">{title}</div>
                   <div class="card__meta">{folder}</div>
                 </a>

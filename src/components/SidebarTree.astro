@@ -1,27 +1,30 @@
 ---
-// src/components/SidebarTree.astro
 import type { TreeNode } from "@lib/notesTree";
 import { normalizeSlug } from "@lib/notesTree";
 
 type Props = {
-  tree: TreeNode; // usually the root folder from buildNotesTree()
-  activeSlug: string; // e.g. "projects/irrigation/pump-design"
-  basePath?: string; // default "/notes"
-  level?: number; // internal recursion
+  tree: TreeNode;
+  activeSlug: string;
+  basePath?: string; // mount base, should be BASE_URL
+  level?: number;
 };
 
 const {
   tree,
   activeSlug,
-  basePath = "/notes",
+  basePath = import.meta.env.BASE_URL,
   level = 0,
 } = Astro.props;
 
 const active = normalizeSlug(activeSlug);
 
+// normalize base once
+const base = String(basePath).replace(/\/?$/, "/");
+const join = (p: string) => `${base}${String(p).replace(/^\/+/, "")}`;
+
 function isFolderOpen(folderPrefix: string) {
   const p = normalizeSlug(folderPrefix);
-  if (!p) return true; // root open
+  if (!p) return true;
   return active === p || active.startsWith(p + "/");
 }
 ---
@@ -36,17 +39,25 @@ function isFolderOpen(folderPrefix: string) {
               <span class="tree__label">{node.name}</span>
             </summary>
 
-            <Astro.self tree={node} activeSlug={activeSlug} basePath={basePath} level={level + 1} />
+            <Astro.self
+              tree={node}
+              activeSlug={activeSlug}
+              basePath={basePath}
+              level={level + 1}
+            />
           </details>
         ) : (
           (() => {
             const noteSlug = normalizeSlug(node.slug);
             const isActive = noteSlug === active;
 
+            // enforce trailing slash for static dir output
+            const href = join(`${noteSlug}/`);
+
             return (
               <a
                 class={`tree__link ${isActive ? "is-active" : ""}`}
-                href={`${basePath}/${node.slug}`}
+                href={href}
                 aria-current={isActive ? "page" : undefined}
               >
                 <span class="tree__file" aria-hidden="true">•</span>

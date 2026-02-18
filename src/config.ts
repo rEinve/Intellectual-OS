@@ -22,6 +22,5 @@ series: z.string().optional(),
 
 
 export const collections = {
-  irrigations,
-    notes,
+    notes
 };

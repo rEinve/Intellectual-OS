@@ -10,9 +10,11 @@ type Props = {
 const { folderSlug, bundle, recursive = true } = Astro.props;
 
 const sections = Array.isArray(bundle?.sections) ? bundle.sections : [];
+
+// BASE-aware link builder (relocatable-safe)
+const base = import.meta.env.BASE_URL.replace(/\/?$/, "/");
+const join = (p: string) => `${base}${String(p).replace(/^\/+/, "")}`;
 ---
-
-
 <section class="distill">
   <header class="distill__header">
     <h1>Distill: {folderSlug}</h1>
@@ -30,7 +32,7 @@ const sections = Array.isArray(bundle?.sections) ? bundle.sections : [];
         s.clips.length ? (
           <section class="streamNote">
             <header class="streamNote__head">
-              <a class="streamNote__link" href={`/notes/${s.sourceSlug}/`}>
+              <a class="streamNote__link" href={join(`${s.sourceSlug}/`)}>
                 {s.sourceTitle}
               </a>
               <span class="streamNote__slug">{s.sourceSlug}</span>
@@ -40,7 +42,10 @@ const sections = Array.isArray(bundle?.sections) ? bundle.sections : [];
               {s.clips.map((clip) => (
                 <div class="clip" id={clip.id}>
                   {clip.section ? (
-                    <a class="clip__meta" href={`/notes/${clip.sourceSlug}/#${clip.section.slug}`}>
+                    <a
+                      class="clip__meta"
+                      href={join(`${clip.sourceSlug}/#${clip.section.slug}`)}
+                    >
                       <span class="clip__sec">{clip.section.text}</span>
                     </a>
                   ) : null}
@@ -55,4 +60,3 @@ const sections = Array.isArray(bundle?.sections) ? bundle.sections : [];
     </div>
   )}
 </section>
-
