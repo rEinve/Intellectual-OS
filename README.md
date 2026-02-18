@@ -99,7 +99,7 @@ src/
     notesIndex.ts
   config/
     workspaces.ts
-scripts/
+  /scripts/
   build-notes-index.js
 ```
 
@@ -158,3 +158,11 @@ This is a thinking system.
 The goal is to distill clarity from raw notes into production output — calmly and structurally.
 
 ---
+
+The repository includes sample notes under:
+src/content/notes/sample/
+
+Your real notes should live under:
+src/content/notes/
+
+The notes directory is gitignored except for sample/.
