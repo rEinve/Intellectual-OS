@@ -9,13 +9,14 @@ const join = (p: string) => `${base}${String(p).replace(/^\/+/, "")}`;
 type Props = {
   folder: { slug: string; title: string; count: number } | null;
   folderSlug: string;
+  workspace?: { key: string; label: string } | null;
   // notes is optional now (kept for compatibility)
   notes?: any[];
 };
 
 
 
-const { folder, folderSlug } = Astro.props;
+const { folder, folderSlug, workspace = null } = Astro.props;
 
 // Prefer passed notes if provided, otherwise fetch (server-first)
 const notes = Array.isArray(Astro.props.notes)
@@ -35,8 +36,20 @@ const inFolder = notes
   });
 
 const title = folder?.title ?? folderSlug;
+
+const workspaceSuffix = workspace
+  ? folderSlug.replace(new RegExp(`^${workspace.key}/?`), "")
+  : "";
+
 ---
 <section class="folderView">
+  {workspace ? (
+    <p class="folderView__workspace">
+      In <a href={`/${workspace.key}/`}>{workspace.label} workspace</a>
+      {workspaceSuffix ? <span> · {workspaceSuffix}</span> : null}
+    </p>
+  ) : null}
+
   <header class="folderView__head">
     <h1 class="folderView__title">{title}</h1>
     <p class="folderView__meta">{inFolder.length} notes</p>
@@ -59,3 +72,19 @@ const title = folder?.title ?? folderSlug;
   </div>
 </section>
 
+
+
+<style lang="scss">
+.folderView__workspace {
+  margin: 0;
+  color: var(--text-primary-50);
+  font-size: 0.92rem;
+}
+
+.folderView__workspace a {
+  color: var(--text-primary-70);
+  text-decoration: none;
+}
+
+.folderView__workspace a:hover { text-decoration: underline; }
+</style>

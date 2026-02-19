@@ -31,8 +31,9 @@ export async function getStaticPaths() {
 const slug = Astro.params.slug ?? "";
 const slugParts = slug.split("/").filter(Boolean);
 
-const workspaceKey = slugParts.length === 1 ? slugParts[0] : null;
+const workspaceKey = slugParts[0] ?? null;
 const wsConfig = workspaceKey ? WORKSPACES[workspaceKey] ?? null : null;
+const isWorkspaceRoot = Boolean(workspaceKey && wsConfig && slugParts.length === 1);
 
 const entries = await getCollection("notes");
 const entry = entries.find((e) => e.slug === slug);
@@ -50,7 +51,7 @@ if (workspaceKey && wsConfig) {
 <NotesLayout>
   {entry ? (
     <NoteView entry={entry} />
-  ) : workspaceKey && wsConfig ? (
+  ) : isWorkspaceRoot ? (
     <WorkspaceBoard
       workspaceKey={workspaceKey}
       workspaceLabel={wsConfig.label}
@@ -59,6 +60,13 @@ if (workspaceKey && wsConfig) {
       subfolders={subfolders}
     />
   ) : (
-    <FolderView folderSlug={slug} />
+    <FolderView
+      folderSlug={slug}
+      workspace={
+        workspaceKey && wsConfig
+          ? { key: workspaceKey, label: wsConfig.label }
+          : null
+      }
+    />
   )}
 </NotesLayout>
