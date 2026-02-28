@@ -1,16 +1,20 @@
 ---
 import NotesLayout from "@layouts/NotesLayout.astro";
 import { getCollection } from "astro:content";
-const base = import.meta.env.BASE_URL
+
+const base = import.meta.env.BASE_URL;
 
 const entries = await getCollection("notes");
 
 // helpers
-const titleFromSlug = (slug) => (slug.split("/").at(-1) ?? slug).replace(/-/g, " ");
-const folderFromSlug = (slug) => slug.split("/").slice(0, -1).join(" / ") || "root";
+const titleFromSlug = (slug: string) =>
+  (slug.split("/").at(-1) ?? slug).replace(/-/g, " ");
+
+const folderFromSlug = (slug: string) =>
+  slug.split("/").slice(0, -1).join(" / ") || "root";
 
 // group by top folder
-const groups = new Map();
+const groups = new Map<string, typeof entries>();
 for (const e of entries) {
   const top = e.slug.split("/")[0] ?? "root";
   const arr = groups.get(top) ?? [];
@@ -23,11 +27,13 @@ for (const [k, arr] of groups) {
   groups.set(k, arr);
 }
 
-const ordered = Array.from(groups.entries()).sort(([a], [b]) => {
-  if (a === "daily") return -1;
-  if (b === "daily") return 1;
-  return a.localeCompare(b);
-});
+const ordered = Array.from(groups.entries()).sort(
+  ([a]: [string, typeof entries], [b]: [string, typeof entries]) => {
+    if (a === "daily") return -1;
+    if (b === "daily") return 1;
+    return a.localeCompare(b);
+  }
+);
 
 const DAILY_MAX = 14;
 ---
