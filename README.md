@@ -10,6 +10,7 @@ This project is a **server-first Intellectual Operating System** designed to:
 
 * Organize notes using slug-driven routing
 * Extract blockquotes (`>`) as distillable clips
+* Show the same board-style workspace experience at every folder level
 * Aggregate knowledge at folder and workspace level
 * Preserve natural writing flow
 * Produce production-ready material (scripts, blog posts, slide drafts)
@@ -28,6 +29,7 @@ It is intentionally:
 
 * **Slug = Structural Truth**
 * **Workspace = First slug segment**
+* **Every folder is a valid board scope**
 * **Recency = Filesystem modified time (mtime)**
 * **Clips = Markdown blockquotes (`>`)**
 * **No required frontmatter**
@@ -39,8 +41,14 @@ It is intentionally:
 
 | Route                      | Behavior                              |
 | -------------------------- | ------------------------------------- |
-| `/notes/[...slug]`         | Note, Folder, or Workspace board      |
-| `/notes/[...slug]/distill` | Extract clips across folder/workspace |
+| `/[...slug]`               | Note or board-style folder/workspace view |
+| `/[...slug]/distill`       | Extract clips across the current folder scope |
+
+Notes:
+
+* Top-level workspaces still come from the first slug segment.
+* Nested folders now render the same board-style experience as workspace roots.
+* Distill works at any folder depth.
 
 ---
 
@@ -58,6 +66,11 @@ Order rules:
 2. Clips preserved in **natural order within each note**
 3. Rendered as a calm continuous stream
 
+Distill scope rules:
+
+* Default distill is recursive for the current folder scope
+* `?scope=direct` limits the distill view to direct notes only
+
 ---
 
 ## Recency System
@@ -67,7 +80,7 @@ Recency is derived from filesystem metadata.
 Before running dev/build:
 
 ```bash
-node scripts/build-notes-index.js
+node ./src/scripts/build-notes-index.js
 ```
 
 Recommended package.json setup:
@@ -90,17 +103,25 @@ Recommended package.json setup:
 ```
 src/
   components/
+    NoteView.astro
+    WorkspaceBoard.astro
+    DistillView.astro
   layouts/
   pages/
+    [...slug].astro
+    [...slug]/distill.astro
   lib/
     clips.ts
     folders.ts
     distillBundle.ts
     notesIndex.ts
+    notesTree.ts
   config/
     workspaces.ts
-  /scripts/
-  build-notes-index.js
+  scripts/
+    build-notes-index.js
+    search.ts
+    search-init.ts
 ```
 
 ---
@@ -108,6 +129,8 @@ src/
 ## Design System
 
 * Token-based styling
+* Shared SCSS partials instead of inline component styles
+* `rem`-first spacing and sizing for values above hairline border scale
 * Material 3 influenced
 * Desktop-first layout
 * Material Symbols via `--font-icon`
@@ -155,7 +178,7 @@ This is not a CMS.
 This is not a blog generator.
 This is a thinking system.
 
-The goal is to distill clarity from raw notes into production output — calmly and structurally.
+The goal is to distill clarity from raw notes into production output, calmly and structurally, from any folder scope.
 
 ---
 

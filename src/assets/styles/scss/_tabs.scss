@@ -10,8 +10,8 @@
   padding: 0;
   margin: 0 auto; // Center the container
   background-color: var(--surface-99);
-  border-radius: 999px;
-  //max-width: 999px; // Ensures the white background fits the content
+  border-radius: 62.4375rem;
+  //max-width: 62.4375rem; // Ensures the white background fits the content
   //border: 1px solid $light-gray;
   position: relative;
   z-index: 1;
@@ -81,7 +81,7 @@
   font-size: calc(0.9rem);
   color: var(--text-primary-50);
   flex-shrink: 0; // Prevents the date from wrapping
-  width: calc(100px);
+  width: calc(6.25rem);
 }
 
 .article-title {

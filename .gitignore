@@ -15,6 +15,7 @@ dist/
 .astro/
 .vercel/
 .netlify/
+.continue/
 output/
 
 # =========================
@@ -31,6 +32,9 @@ output/
 Thumbs.db
 .vscode/
 .idea/
+.zed/
+.roo/
+.roomodes
 
 # =========================
 # Notes Privacy (IMPORTANT)
@@ -52,3 +56,10 @@ src/content/notes.index.json
 # Logs
 # =========================
 *.log
+
+# =========================
+# Local Scratch / Tooling
+# =========================
+functions_classes.txt
+src/imports.txt
+intellectual os freezy.md

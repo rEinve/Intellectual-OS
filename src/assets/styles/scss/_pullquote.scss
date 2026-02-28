@@ -34,8 +34,8 @@
     }
 
     .is-style-left {
-        border-top: 4px solid fun.color-color("black");
-        border-bottom: 4px solid fun.color-color("black");
+        border-top: 0.25rem solid fun.color-color("black");
+        border-bottom: 0.25rem solid fun.color-color("black");
         margin-top: fun.space-pos("tight");
         margin-bottom: fun.space-pos("default");
         padding-top: fun.space-pos("default");
@@ -84,12 +84,12 @@
 
     .is-style-stacked {
         &.has-text-align-left {
-            border-left: 4px solid var(--wp--preset--color--black);
+            border-left: 0.25rem solid var(--wp--preset--color--black);
             padding: fun.space-pos("default") 0 fun.space-pos("default") fun.space-pos("wide");
 
             .rtl & {
                 border-left: none;
-                border-right: 4px solid var(--wp--preset--color--black);
+                border-right: 0.25rem solid var(--wp--preset--color--black);
                 padding: fun.space-pos("default") fun.space-pos("wide") fun.space-pos("default") 0;
             }
         }
@@ -131,7 +131,7 @@
     }
 }
 
-@media (max-width: 1278px) and (min-width: 992px) {
+@media (max-width: 79.875rem) and (min-width: 62rem) {
     .wp-block-column.column--quote.pullquote.flex-basis-25 {
         flex: 0 1 calc(25 * 1%);
     }

@@ -72,10 +72,10 @@
     }
     &__input {
         flex: 1;
-        min-width: 334px;
+        min-width: 20.875rem;
         background: var(--surface-95); // Subtle M3 surface tone
         border: 2px solid transparent;
-        border-radius: var(--radius-control-md); //12px shape
+        border-radius: var(--radius-control-md); //0.75rem shape
         padding: 0.8rem 1.2rem;
         transition: all var(--motion-standard) var(--ease-standard); // Standard easing
 

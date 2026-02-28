@@ -34,7 +34,7 @@
         background-color var(--motion-standard) var(--ease-standard);
 
     &:hover {
-        transform: translateY(-8px);
+        transform: translateY(-0.5rem);
         //box-shadow: var(--elevation-3);
         background-color: oklch(from var(--surface-100) l c h / 0.98);
     }

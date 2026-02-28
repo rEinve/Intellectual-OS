@@ -37,10 +37,6 @@ export default defineConfig({
         ],
     },
 
-    content: {
-        collections: {}
-    },
-
     server: {
         port: 3030,
         host: true, // Exposes dev server to your local network

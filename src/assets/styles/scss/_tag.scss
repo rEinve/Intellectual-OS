@@ -1,7 +1,7 @@
 /* 1. THE HUB HEADER: Massive 2026 Typography */
 .hub-header {
     background-color: var(--surface-99);
-    /* 100px Top & Bottom */
+    /* 6.25rem Top & Bottom */
     width: 100%;
     display: flex;
     justify-content: center;
@@ -24,7 +24,7 @@
     margin-inline: auto;
     /* Centers the pillar */
     padding-block: var(--space-xxl);
-    /* 100px Top/Bottom */
+    /* 6.25rem Top/Bottom */
 
     img {
         object-fit: cover;
@@ -84,7 +84,7 @@
 }
 
 .category-anchor {
-    /* Span the full 1920px width of the .frame grid */
+    /* Span the full 120rem width of the .frame grid */
     grid-column: 1 / -1;
 
     display: grid;

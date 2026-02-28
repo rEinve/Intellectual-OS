@@ -1,12 +1,16 @@
 ---
 import NotesLayout from "@layouts/NotesLayout.astro";
 import WorkspaceBoard from "@components/WorkspaceBoard.astro";
-import FolderView from "@components/FolderView.astro";
 import NoteView from "@components/NoteView.astro";
 
 import { getCollection } from "astro:content";
 import { WORKSPACES } from "@config/workspaces";
-import { entriesInWorkspace, directSubfolders } from "@lib/workspaceBoard";
+import {
+  directChildFolders,
+  entriesUnderFolder,
+  isFolderSlug,
+  labelFromFolderSlug,
+} from "@lib/folders";
 
 export async function getStaticPaths() {
   const entries = await getCollection("notes");
@@ -36,13 +40,20 @@ const wsConfig = workspaceKey ? WORKSPACES[workspaceKey] ?? null : null;
 
 const entries = await getCollection("notes");
 const entry = entries.find((e) => e.slug === slug);
+const folderMatch = !entry && isFolderSlug(entries, slug);
 
 let wsEntries = [];
 let subfolders = [];
+let boardLabel = "";
+let boardDescription: string | undefined;
+let scopeKind: "Workspace" | "Folder" = "Folder";
 
-if (workspaceKey && wsConfig) {
-  wsEntries = entriesInWorkspace(entries, workspaceKey);
-  subfolders = directSubfolders(entries, workspaceKey);
+if (folderMatch) {
+  wsEntries = entriesUnderFolder(entries, slug);
+  subfolders = directChildFolders(entries, slug);
+  boardLabel = wsConfig?.label ?? labelFromFolderSlug(slug);
+  boardDescription = wsConfig?.description;
+  scopeKind = wsConfig ? "Workspace" : "Folder";
 }
 
 ---
@@ -50,15 +61,19 @@ if (workspaceKey && wsConfig) {
 <NotesLayout>
   {entry ? (
     <NoteView entry={entry} />
-  ) : workspaceKey && wsConfig ? (
+  ) : folderMatch ? (
     <WorkspaceBoard
-      workspaceKey={workspaceKey}
-      workspaceLabel={wsConfig.label}
-      description={wsConfig.description}
+      scopeSlug={slug}
+      scopeLabel={boardLabel}
+      scopeKind={scopeKind}
+      description={boardDescription}
       entries={wsEntries}
       subfolders={subfolders}
     />
   ) : (
-    <FolderView folderSlug={slug} />
+    <section class="folderMissing">
+      <h1>Not found</h1>
+      <p>No note or folder matches <code>{slug}</code>.</p>
+    </section>
   )}
 </NotesLayout>

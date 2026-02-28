@@ -19,7 +19,7 @@
   gap: calc(3rem);
   padding-bottom: calc(2rem);
 
-  @media (max-width: 768px) {
+  @media (max-width: 48rem) {
     grid-template-columns: 1fr;
     /* Stack columns on smaller screens */
   }
@@ -31,7 +31,7 @@
   grid-template-columns: repeat(3, 1fr); // 3 equal columns
   gap: calc(3rem);
 
-  @media (max-width: 768px) {
+  @media (max-width: 48rem) {
     grid-template-columns: 1fr;
     /* Stack columns on smaller screens */
   }
@@ -49,8 +49,8 @@
     gap: 1.5rem;
 
     .logo {
-      width: calc(60px);
-      height: calc(60px);
+      width: calc(3.75rem);
+      height: calc(3.75rem);
       margin: 0;
     }
 
@@ -109,7 +109,7 @@
     color: var(--accent-80);
     /* Your warm growth accent */
     transform: translateY(-0.25rem);
-    /* The 4px Sovereign Lift */
+    /* The 0.25rem Sovereign Lift */
   }
 
 }
@@ -117,7 +117,7 @@
 .social-links-font {
   display: flex;
   gap: var(--space-m);
-  /* 1rem / 16px */
+  /* 1rem / 1rem */
   align-items: center;
 
   a {
@@ -126,7 +126,7 @@
     align-items: center;
     justify-content: center;
     width: 2.5rem;
-    /* M3 Standard Touch Target (40px) */
+    /* M3 Standard Touch Target (2.5rem) */
 
 
     a:hover {

@@ -1,44 +1,64 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import { humanizeSegment } from "@lib/notesTree";
 
 type Props = {
-  workspaceKey: string;
-  workspaceLabel: string;
+  scopeSlug: string;
+  scopeLabel: string;
+  scopeKind?: "Workspace" | "Folder";
   description?: string;
   entries: CollectionEntry<"notes">[];
   subfolders: { folderSlug: string; count: number }[];
 };
 
-const { workspaceKey, workspaceLabel, description, entries, subfolders } = Astro.props;
+const {
+  scopeSlug,
+  scopeLabel,
+  scopeKind = "Folder",
+  description,
+  entries,
+  subfolders,
+} = Astro.props;
 
-const distillAllHref = `/${workspaceKey}/distill/`;
-const distillDirectHref = `/${workspaceKey}/distill?scope=direct`;
+const distillAllHref = `/${scopeSlug}/distill/`;
+const distillDirectHref = `/${scopeSlug}/distill?scope=direct`;
+const browseHref = `/${scopeSlug}/`;
+const parentSlug = scopeSlug.split("/").slice(0, -1).join("/");
+const parentHref = parentSlug ? `/${parentSlug}/` : null;
+const totalNotes = entries.length;
 
 // “Recent” without timestamps (deterministic): take last N by slug order
-const recentNotes = entries.filter(e => e.slug !== workspaceKey).slice(-10).reverse();
+const recentNotes = entries.slice(-10).reverse();
 ---
 
 <section class="ws-board">
   <header class="ws-header">
     <div class="ws-title">
-      <p class="label-m ws-kicker">Workspace</p>
-      <h1 class="headline-l">{workspaceLabel}</h1>
+      <p class="label-m ws-kicker">{scopeKind}</p>
+      <h1 class="headline-l">{scopeLabel}</h1>
       {description ? <p class="body-m ws-desc">{description}</p> : null}
+      <p class="label-m ws-metaPath">{scopeSlug}</p>
     </div>
 
     <div class="ws-actions" role="group" aria-label="Workspace actions">
       <a class="ws-btn ws-btn--primary" href={distillAllHref}>
         <span class="material-symbols-outlined" aria-hidden="true">auto_awesome</span>
-        Distill workspace
+        Distill {scopeKind.toLowerCase()}
       </a>
       <a class="ws-btn" href={distillDirectHref}>
         <span class="material-symbols-outlined" aria-hidden="true">filter_alt</span>
         Direct only
       </a>
-      <a class="ws-btn" href={`/${workspaceKey}/`}>
+      <a class="ws-btn" href={browseHref}>
         <span class="material-symbols-outlined" aria-hidden="true">folder_open</span>
         Browse
       </a>
+      {parentHref ? (
+        <a class="ws-btn" href={parentHref}>
+          <span class="material-symbols-outlined" aria-hidden="true">subdirectory_arrow_left</span>
+          Up one level
+        </a>
+      ) : null}
     </div>
   </header>
 
@@ -50,26 +70,32 @@ const recentNotes = entries.filter(e => e.slug !== workspaceKey).slice(-10).reve
         <p class="label-m ws-meta">{subfolders.length} groups</p>
       </header>
 
-      <div class="ws-folderGrid">
-        {subfolders.slice(0, 12).map((f) => (
-          <a class="ws-folderTile" href={`/${f.folderSlug}/`}>
-            <div class="ws-folderTile__icon" aria-hidden="true">
-              <span class="material-symbols-outlined">folder</span>
-            </div>
-            <div class="ws-folderTile__body">
-              <div class="ws-folderTile__name">{f.folderSlug.split("/").slice(-1)[0]}</div>
-              <div class="ws-folderTile__meta">{f.count} notes</div>
-            </div>
-            <span class="material-symbols-outlined ws-folderTile__chev" aria-hidden="true">chevron_right</span>
-          </a>
-        ))}
-      </div>
+      {subfolders.length ? (
+        <>
+          <div class="ws-folderGrid">
+            {subfolders.slice(0, 12).map((f) => (
+              <a class="ws-folderTile" href={`/${f.folderSlug}/`}>
+                <div class="ws-folderTile__icon" aria-hidden="true">
+                  <span class="material-symbols-outlined">folder</span>
+                </div>
+                <div class="ws-folderTile__body">
+                  <div class="ws-folderTile__name">{humanizeSegment(f.folderSlug.split("/").slice(-1)[0] ?? "")}</div>
+                  <div class="ws-folderTile__meta">{f.count} notes</div>
+                </div>
+                <span class="material-symbols-outlined ws-folderTile__chev" aria-hidden="true">chevron_right</span>
+              </a>
+            ))}
+          </div>
 
-      {subfolders.length > 12 ? (
-        <footer class="ws-card__footer">
-          <a class="ws-link" href={`/${workspaceKey}/`}>View all folders</a>
-        </footer>
-      ) : null}
+          {subfolders.length > 12 ? (
+            <footer class="ws-card__footer">
+              <a class="ws-link" href={browseHref}>View all folders</a>
+            </footer>
+          ) : null}
+        </>
+      ) : (
+        <p class="body-m ws-muted">No nested folders here yet.</p>
+      )}
     </section>
 
     <!-- Column B: Production lanes -->
@@ -85,7 +111,7 @@ const recentNotes = entries.filter(e => e.slug !== workspaceKey).slice(-10).reve
             <span class="label-m">Distill</span>
             <span class="ws-pill">Fast</span>
           </div>
-          <p class="body-m ws-muted">Extract clips and key blocks across the workspace.</p>
+          <p class="body-m ws-muted">Extract clips and key blocks across this {scopeKind.toLowerCase()}.</p>
           <a class="ws-lane__cta" href={distillAllHref}>Open distill</a>
         </div>
 
@@ -113,23 +139,29 @@ const recentNotes = entries.filter(e => e.slug !== workspaceKey).slice(-10).reve
     <section class="ws-card" aria-label="Recent notes">
       <header class="ws-card__header">
         <h2 class="title-m">Recent notes</h2>
-        <p class="label-m ws-meta">Recent activity</p>
+        <p class="label-m ws-meta">{totalNotes} notes in scope</p>
       </header>
 
-      <ol class="ws-list">
-        {recentNotes.map((e) => (
-          <li class="ws-list__item">
-            <a class="ws-list__link" href={`/${e.slug}/`}>
-              <span class="ws-list__title">{e.slug.split("/").slice(-1)[0]}</span>
-              <span class="ws-list__sub">{e.slug}</span>
-            </a>
-          </li>
-        ))}
-      </ol>
+      {recentNotes.length ? (
+        <>
+          <ol class="ws-list">
+            {recentNotes.map((e) => (
+              <li class="ws-list__item">
+                <a class="ws-list__link" href={`/${e.slug}/`}>
+                  <span class="ws-list__title">{e.data?.title ?? humanizeSegment(e.slug.split("/").slice(-1)[0] ?? "")}</span>
+                  <span class="ws-list__sub">{e.slug}</span>
+                </a>
+              </li>
+            ))}
+          </ol>
 
-      <footer class="ws-card__footer">
-        <a class="ws-link" href={`/${workspaceKey}/distill`}>Distill from recent</a>
-      </footer>
+          <footer class="ws-card__footer">
+            <a class="ws-link" href={distillAllHref}>Distill from recent</a>
+          </footer>
+        </>
+      ) : (
+        <p class="body-m ws-muted">No notes in this folder yet.</p>
+      )}
     </section>
   </div>
 </section>

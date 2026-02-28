@@ -49,7 +49,7 @@ export function initSearch(root: HTMLElement) {
       .slice(0, 10)
       .map(
         (r) => `
-          <a class="search__item" href="${BASE}notes/${r.item.slug}">
+          <a class="search__item" href="/${r.item.slug}/">
             <div class="search__title">${r.item.title}</div>
           </a>
         `
