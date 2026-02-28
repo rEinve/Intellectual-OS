@@ -54,7 +54,7 @@
         src: url("../fonts/MaterialSymbolsRounded-VariableFont_FILL,GRAD,opsz,wght.ttf") format("woff2-variations");
         font-weight: normal;
         font-style: normal;
-        font-size: 20px;
+        font-size: 1.25rem;
         /* calm default */
         line-height: 1;
         display: inline-block;
@@ -75,12 +75,12 @@
 
     --font-icon: "MaterialSymbolsRounded";
     /* --- Breakpoints --- */
-    --breakpoint-mobile: 600px;
-    --breakpoint-tablet: 900px;
-    --breakpoint-desktop: 1200px;
+    --breakpoint-mobile: 37.5rem;
+    --breakpoint-tablet: 56.25rem;
+    --breakpoint-desktop: 75rem;
 
     /* --- Fluid Scale Setup (Perfect Fourth) --- */
-    /* Transitions from 16px on mobile to 18px on desktop */
+    /* Transitions from 1rem on mobile to 1.125rem on desktop */
     --step-0: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
     /* Scale up using a fluid multiplier */
     --step-1: calc(var(--step-0) * 1.333);
@@ -246,17 +246,17 @@ hr {
 
 
 .body-l {
-    font-size: var(--step-1); // ~21px
+    font-size: var(--step-1); // ~1.3125rem
 }
 
 /* Standard UI / Descriptions */
 .body-m {
-    font-size: var(--step-0); // 16px
+    font-size: var(--step-0); // 1rem
 }
 
 /* Dense info / Sidebar notes */
 .body-s {
-    font-size: var(--text-sm); // ~12px
+    font-size: var(--text-sm); // ~0.75rem
 }
 
 //==========================================================================
@@ -352,7 +352,7 @@ a {
 blockquote {
     margin: 3rem 0;
     padding-left: 1.5rem;
-    border-left: 3px solid oklch(80% 0.02 140);
+    border-left: 0.1875rem solid oklch(80% 0.02 140);
     font-style: normal;
     color: var(--accent-30);
 
@@ -479,7 +479,7 @@ strong {
 .headline-l {
     font-size: var(--step-3);
 
-    @media (max-width: 600px) {
+    @media (max-width: 37.5rem) {
         font-size: var(--step-2);
         /* Scale down for mobile */
     }
@@ -495,7 +495,7 @@ p,
     /* Optimal line length for readability */
 
     /* Material 3 recommends slightly heavier weights on mobile for legibility */
-    @media (max-width: 600px) {
+    @media (max-width: 37.5rem) {
         font-variation-settings:
             "wght"450,
             "opsz"14;
@@ -516,12 +516,12 @@ p,
 html {
     -webkit-font-smoothing: antialiased;
 
-    @media (min-width: 1200px) {
+    @media (min-width: 75rem) {
         /* Larger screens can handle finer details */
         font-variation-settings: "opsz"18;
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 37.5rem) {
         /* Small screens need thicker strokes for small text */
         font-variation-settings: "opsz"12;
     }

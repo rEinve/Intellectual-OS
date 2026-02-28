@@ -2,7 +2,7 @@
   font-family: var(--font-icon);
   font-weight: normal;
   font-style: normal;
-  font-size: 20px; /* calm default */
+  font-size: 1.25rem; /* calm default */
   line-height: 1;
   display: inline-block;
   vertical-align: middle;
@@ -58,7 +58,7 @@
   box-shadow: var(--surface-raised);
   text-decoration: none;
   color: var(--on-surface);
-  min-height: 48px; /* touch target */
+  min-height: 3rem; /* touch target */
 }
 
 .ws-btn--primary {
@@ -122,12 +122,12 @@
   text-decoration: none;
   color: var(--on-surface);
   background: oklch(from var(--surface-95) l c h / 0.55);
-  min-height: 56px;
+  min-height: 3.5rem;
 }
 
 .ws-folderTile__icon {
-  width: 40px;
-  height: 40px;
+  width: 2.5rem;
+  height: 2.5rem;
   border-radius: var(--radius-pill);
   display: grid;
   place-items: center;

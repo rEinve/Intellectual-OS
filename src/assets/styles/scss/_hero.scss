@@ -48,7 +48,7 @@
 .btn-primary {
 
   padding: 0.75rem 1.25rem;
-  border-radius: 999px;
+  border-radius: 62.4375rem;
   font-weight: 500;
 }
 
@@ -59,7 +59,7 @@
 .btn-secondary {
   color: var(--text-primary);
   padding: 0.75rem 1.25rem;
-  border-radius: 999px;
+  border-radius: 62.4375rem;
 }
 
 .hero-visual img {
@@ -68,7 +68,7 @@
   border-radius: 1.5rem;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 56.25rem) {
   .hero-inner {
     grid-template-columns: 1fr;
   }

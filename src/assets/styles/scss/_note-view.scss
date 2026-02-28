@@ -1,0 +1,55 @@
+.noteView {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.noteView__head {
+  margin-bottom: 1rem;
+}
+
+.noteView__title {
+  margin: 0.25rem 0 0.35rem;
+  color: var(--text-primary-70);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  font-size: clamp(1.75rem, 2.2vw, 2.4rem);
+}
+
+.noteView__desc {
+  margin: 0;
+  color: var(--text-primary-50);
+  max-width: 70ch;
+}
+
+.noteView__pager {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.pager {
+  text-decoration: none;
+  border-radius: 1rem;
+  border: 1px solid oklch(var(--shadow-dna) / 0.10);
+  background: var(--surface);
+  box-shadow: var(--elevation-0);
+  padding: 0.85rem 0.9rem;
+  min-height: 3rem;
+  display: grid;
+  gap: 0.25rem;
+}
+
+.pager:hover {
+  box-shadow: var(--elevation-1);
+}
+
+.pager__k {
+  color: var(--text-primary-50);
+  font-size: 0.9rem;
+}
+
+.pager__t {
+  color: var(--text-primary-70);
+  font-weight: 650;
+}

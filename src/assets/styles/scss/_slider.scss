@@ -5,7 +5,7 @@
     position: relative;
 
     .wrapper {
-        border-radius: 32px;
+        border-radius: 2rem;
         overflow: hidden;
         position: relative;
     }
@@ -50,10 +50,10 @@
             align-items: center;
             aspect-ratio: 1/1;
             background-color: var(--surface-95);
-            border-radius: 14px;
+            border-radius: 0.875rem;
             display: flex;
             justify-content: center;
-            @extend .border-rl; // 32px radius
+            @extend .border-rl; // 2rem radius
             padding: var(--space-xl);
             width: 100%;
 

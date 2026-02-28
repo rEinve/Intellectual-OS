@@ -64,12 +64,12 @@
 
     .field {
         flex: 1;
-        min-width: 280px; // Slightly wider for better M3 ergonomics
+        min-width: 17.5rem; // Slightly wider for better M3 ergonomics
     }
 
     .btn-submit {
         @extend .motion-fast;
-        height: 56px; // M3 Standard Height for primary actions
+        height: 3.5rem; // M3 Standard Height for primary actions
         background-color: var(--text-primary-20);
         color: var(--surface);
         border: none;

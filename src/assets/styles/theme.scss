@@ -9,5 +9,8 @@
 /* Docs-only layer (reader styles) */
 @use "./scss/docs";
 @use "./scss/distill";
+@use "./scss/note-view";
+@use "./scss/clips-panel";
+@use "./reading";
 @use "./typography.css";
-@use"./scss/workspace-board";
+@use "./scss/workspace-board";

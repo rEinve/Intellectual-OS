@@ -4,10 +4,10 @@
 /* src/scss/_vars.scss */
 
 // Material 3 Official Breakpoints
-$m3-compact: 600px; // Phone
-$m3-medium: 840px; // Tablet
-$m3-expanded: 1200px; // Desktop
-$m3-large: 1600px; // Ultra-wide
+$m3-compact: 37.5rem; // Phone
+$m3-medium: 52.5rem; // Tablet
+$m3-expanded: 75rem; // Desktop
+$m3-large: 100rem; // Ultra-wide
 
 /* src/scss/_mixins.scss */
 
@@ -46,11 +46,11 @@ $m3-large: 1600px; // Ultra-wide
         var(--surface) #{$opacity * 100%},
         transparent
     );
-    backdrop-filter: blur(12px) saturate(150%);
+    backdrop-filter: blur(0.75rem) saturate(150%);
 
     /* In dark mode, we make the border subtle and "Inner-Glow" style */
     border: 1px solid rgba(255, 255, 255, 0.05);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0.625rem 2.5rem rgba(0, 0, 0, 0.4);
 }
 
 /* Update to _mixin.scss */

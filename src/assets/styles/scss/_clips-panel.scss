@@ -1,0 +1,81 @@
+.clips {
+  margin-top: 1.125rem;
+  padding-left: 1rem;
+  border-left: 1px solid var(--outline-variant, rgba(0, 0, 0, .12));
+}
+
+.clips__title {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.75rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--on-surface-variant, rgba(0, 0, 0, .55));
+  margin: 0.25rem 0 0.625rem;
+}
+
+.clips__count {
+  font-size: 0.6875rem;
+  opacity: 0.7;
+}
+
+.clips__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.625rem;
+}
+
+.clips__item {
+  margin: 0;
+  padding: 0;
+}
+
+.clips__meta {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.375rem;
+  text-decoration: none;
+  color: var(--on-surface, #111);
+  opacity: 0.82;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.625rem;
+}
+
+.clips__meta:hover {
+  background: color-mix(in oklab, var(--surface, #fff), var(--on-surface, #111) 6%);
+  opacity: 1;
+}
+
+.clips__sep {
+  opacity: 0.55;
+}
+
+.clips__from {
+  font-weight: 550;
+}
+
+.clips__section {
+  opacity: 0.75;
+}
+
+.clips__text {
+  margin: 0.375rem 0 0;
+  padding: 0.625rem 0.75rem;
+  border-radius: 0.875rem;
+  background: color-mix(in oklab, var(--surface, #fff), var(--on-surface, #111) 4%);
+  border: 1px solid var(--outline-variant, rgba(0, 0, 0, .10));
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow: hidden;
+}
+
+.clips__text code {
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--on-surface, #111);
+}
